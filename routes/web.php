@@ -5,6 +5,7 @@ use App\Http\Controllers\Citizen;
 use App\Http\Controllers\Agent;
 use App\Http\Controllers\Admin;
 use App\Http\Controllers\ProfileController;
+use App\Models\Domain;
 use Illuminate\Support\Facades\Route;
 
 // ─── Public routes ──────────────────────────────────────────────────────────
@@ -48,14 +49,27 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::resource('utilisateurs', Admin\UserController::class)->names('users')->parameters(['utilisateurs' => 'user']);
     Route::patch('/utilisateurs/{user}/statut', [Admin\UserController::class, 'toggleStatus'])->name('users.toggle');
 
+    // Domains
+    Route::resource('domaines', Admin\DomainController::class)->names('domains')->parameters(['domaines' => 'domain']);
+
     // Categories
     Route::resource('categories', Admin\CategoryController::class);
+
+    // Teams
+    Route::resource('equipes', Admin\TeamController::class)->names('teams')->parameters(['equipes' => 'team']);
 
     // Reports
     Route::get('/signalements', [Admin\ReportController::class, 'index'])->name('reports.index');
     Route::get('/signalements/statistiques', [Admin\ReportController::class, 'statistics'])->name('reports.statistics');
     Route::get('/signalements/{report}', [Admin\ReportController::class, 'show'])->name('reports.show');
 });
+
+// ─── API interne : catégories par domaine ────────────────────────────────────
+Route::get('/api/domaines/{domain}/categories', function (Domain $domain) {
+    return response()->json(
+        $domain->categories()->where('is_active', true)->orderBy('name')->get(['id', 'name', 'color'])
+    );
+})->middleware('auth')->name('api.domain.categories');
 
 // ─── Smart redirect after login ──────────────────────────────────────────────
 Route::get('/dashboard', function () {

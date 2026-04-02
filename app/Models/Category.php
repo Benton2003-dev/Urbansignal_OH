@@ -7,7 +7,7 @@ use Illuminate\Support\Str;
 
 class Category extends Model
 {
-    protected $fillable = ['name', 'slug', 'description', 'icon', 'color', 'is_active'];
+    protected $fillable = ['domain_id', 'name', 'slug', 'description', 'icon', 'color', 'is_active'];
 
     protected $casts = ['is_active' => 'boolean'];
 
@@ -19,6 +19,11 @@ class Category extends Model
                 $category->slug = Str::slug($category->name);
             }
         });
+    }
+
+    public function domain()
+    {
+        return $this->belongsTo(Domain::class);
     }
 
     public function reports()

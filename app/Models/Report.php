@@ -9,6 +9,7 @@ class Report extends Model
     protected $fillable = [
         'ticket_number',
         'user_id',
+        'domain_id',
         'category_id',
         'arrondissement_id',
         'title',
@@ -86,6 +87,11 @@ class Report extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function domain()
+    {
+        return $this->belongsTo(Domain::class);
     }
 
     public function category()

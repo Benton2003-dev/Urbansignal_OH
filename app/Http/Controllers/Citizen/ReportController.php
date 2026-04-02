@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Citizen;
 use App\Http\Controllers\Controller;
 use App\Models\Arrondissement;
 use App\Models\Category;
+use App\Models\Domain;
 use App\Models\Report;
 use App\Models\ReportPhoto;
 use App\Models\ReportStatusHistory;
@@ -17,15 +18,16 @@ class ReportController extends Controller
 {
     public function create()
     {
-        $categories      = Category::where('is_active', true)->orderBy('name')->get();
+        $domains         = Domain::where('is_active', true)->orderBy('name')->get();
         $arrondissements = Arrondissement::where('is_active', true)->orderBy('name')->get();
 
-        return view('citizen.reports.create', compact('categories', 'arrondissements'));
+        return view('citizen.reports.create', compact('domains', 'arrondissements'));
     }
 
     public function store(Request $request)
     {
         $validated = $request->validate([
+            'domain_id'         => 'required|exists:domains,id',
             'category_id'       => 'required|exists:categories,id',
             'arrondissement_id' => 'required|exists:arrondissements,id',
             'title'             => 'required|string|max:255',
@@ -41,6 +43,7 @@ class ReportController extends Controller
             $report = Report::create([
                 'ticket_number'     => TicketService::generate(),
                 'user_id'           => auth()->id(),
+                'domain_id'         => $validated['domain_id'],
                 'category_id'       => $validated['category_id'],
                 'arrondissement_id' => $validated['arrondissement_id'],
                 'title'             => $validated['title'],

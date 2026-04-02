@@ -39,6 +39,8 @@
                             <a href="{{ route('admin.dashboard') }}" class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-100 transition">Tableau de bord</a>
                             <a href="{{ route('admin.reports.index') }}" class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-100 transition">Signalements</a>
                             <a href="{{ route('admin.users.index') }}" class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-100 transition">Utilisateurs</a>
+                            <a href="{{ route('admin.domains.index') }}" class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-100 transition">Domaines</a>
+                            <a href="{{ route('admin.teams.index') }}" class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-100 transition">Équipes</a>
                             <a href="{{ route('admin.categories.index') }}" class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-100 transition">Catégories</a>
                         @elseif(auth()->user()->isAgent())
                             <a href="{{ route('agent.dashboard') }}" class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-100 transition">Tableau de bord</a>

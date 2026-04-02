@@ -18,12 +18,12 @@
             Retour
         </a>
         <h1 class="text-2xl font-bold text-gray-900">Nouveau signalement</h1>
-        <p class="text-gray-500 text-sm mt-1">Signalez un problème de voirie dans votre quartier.</p>
+        <p class="text-gray-500 text-sm mt-1">Signalez un problème dans votre quartier (voirie, eau, électricité, assainissement…)</p>
     </div>
 
     {{-- Step indicators --}}
     <div class="flex items-center mb-8" id="steps">
-        @php $stepLabels = ['Catégorie', 'Localisation', 'Photos', 'Description']; @endphp
+        @php $stepLabels = ['Domaine & Catégorie', 'Localisation', 'Photos', 'Description']; @endphp
         @foreach($stepLabels as $i => $label)
         <div class="flex items-center {{ $loop->last ? '' : 'flex-1' }}">
             <div class="step-indicator flex items-center justify-center w-8 h-8 rounded-full text-sm font-bold
@@ -52,47 +52,52 @@
     <form action="{{ route('citizen.reports.store') }}" method="POST" enctype="multipart/form-data" id="report-form">
         @csrf
 
-        {{-- ─── STEP 1: Category ─────────────────────────────────────────── --}}
+        {{-- ─── STEP 1: Domaine + Catégorie ──────────────────────────────── --}}
         <div id="step-0" class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
-            <h2 class="text-lg font-semibold text-gray-900 mb-4">Quel type de problème ?</h2>
-            <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
-                @foreach($categories as $category)
-                <label class="cursor-pointer">
-                    <input type="radio" name="category_id" value="{{ $category->id }}" class="sr-only peer" {{ old('category_id') == $category->id ? 'checked' : '' }}>
-                    <div class="p-4 border-2 border-gray-200 rounded-xl text-center peer-checked:border-green-500 peer-checked:bg-green-50 hover:border-gray-300 transition">
-                        <div class="w-10 h-10 rounded-full mx-auto mb-2 flex items-center justify-center" style="background-color: {{ $category->color }}20">
-                            <span style="color: {{ $category->color }}" class="w-7 h-7 block">
-                                @switch($category->slug)
-                                    @case('nid-de-poule')
-                                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
-                                    @break
-                                    @case('affaissement-de-chaussee')
-                                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
-                                    @break
-                                    @case('route-inondee')
-                                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/></svg>
-                                    @break
-                                    @case('signalisation-endommagee')
-                                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9"/></svg>
-                                    @break
-                                    @case('caniveau-bouche')
-                                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h16a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1v-2zM9 16a1 1 0 011-1h10a1 1 0 011 1v2a1 1 0 01-1 1H10a1 1 0 01-1-1v-2z"/></svg>
-                                    @break
-                                    @case('eclairage-public-defaillant')
-                                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
-                                    @break
-                                    @case('route-degradee')
-                                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10l2.636.022M13 16l2.636.022M13 16V8h5.528a2 2 0 011.814 1.157l1.408 3.52A1.997 1.997 0 0122 14v2l-2.364.022M4.636 16.022L4 16"/></svg>
-                                    @break
-                                    @default
-                                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
-                                @endswitch
-                            </span>
+
+            {{-- Champs cachés --}}
+            <input type="hidden" name="domain_id" id="domain_id" value="{{ old('domain_id') }}">
+            <input type="hidden" name="category_id" id="category_id" value="{{ old('category_id') }}">
+
+            {{-- 1a. Choix du domaine --}}
+            <h2 class="text-lg font-semibold text-gray-900 mb-1">Quel service est concerné ?</h2>
+            <p class="text-sm text-gray-500 mb-4">Choisissez le domaine correspondant à votre problème.</p>
+
+            <div class="grid grid-cols-2 gap-3 mb-6" id="domain-cards">
+                @foreach($domains as $domain)
+                <button type="button" onclick="selectDomain({{ $domain->id }}, '{{ $domain->name }}', '{{ $domain->color }}')"
+                        id="domain-card-{{ $domain->id }}"
+                        class="domain-card p-4 border-2 border-gray-200 rounded-xl text-left hover:border-gray-300 transition {{ old('domain_id') == $domain->id ? 'border-green-500 bg-green-50' : '' }}">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style="background-color: {{ $domain->color }}20">
+                            <div class="w-4 h-4 rounded-full" style="background-color: {{ $domain->color }}"></div>
                         </div>
-                        <p class="text-xs font-medium text-gray-700 leading-tight">{{ $category->name }}</p>
+                        <div>
+                            <p class="text-sm font-semibold text-gray-900">{{ $domain->name }}</p>
+                            @if($domain->description)
+                            <p class="text-xs text-gray-400 leading-tight mt-0.5">{{ Str::limit($domain->description, 40) }}</p>
+                            @endif
+                        </div>
                     </div>
-                </label>
+                </button>
                 @endforeach
+            </div>
+
+            {{-- 1b. Catégories (chargées dynamiquement) --}}
+            <div id="category-section" class="{{ old('domain_id') ? '' : 'hidden' }}">
+                <div class="border-t border-gray-100 pt-5 mb-4">
+                    <h3 class="text-base font-semibold text-gray-900 mb-1">Quel type de problème ?</h3>
+                    <p class="text-sm text-gray-500 mb-3" id="category-subtitle">Sélectionnez la catégorie correspondante.</p>
+                </div>
+
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-3" id="category-grid">
+                    {{-- Chargé dynamiquement via JS --}}
+                </div>
+
+                <div id="category-loading" class="hidden py-8 text-center">
+                    <svg class="w-6 h-6 animate-spin text-green-500 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                    <p class="text-sm text-gray-400 mt-2">Chargement des catégories…</p>
+                </div>
             </div>
 
             {{-- Arrondissement --}}
@@ -238,7 +243,7 @@
             <div class="bg-blue-50 border border-blue-100 rounded-xl p-4 mb-6">
                 <p class="text-sm text-blue-700 flex items-start gap-2">
                     <svg class="w-4 h-4 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
-                    <span><strong>Rappel :</strong> En soumettant ce signalement, vous acceptez que les informations fournies soient traitées par la mairie de Ouidah dans le but d'améliorer la voirie.</span>
+                    <span><strong>Rappel :</strong> En soumettant ce signalement, vous acceptez que les informations fournies soient traitées par la mairie de Ouidah dans le but d'améliorer les services urbains et la qualité de vie dans la commune.</span>
                 </p>
             </div>
 
@@ -290,9 +295,11 @@ function showStep(step) {
 
 function nextStep(from) {
     if (from === 0) {
-        const cat = document.querySelector('input[name="category_id"]:checked');
+        const domainId = document.getElementById('domain_id').value;
+        const categoryId = document.getElementById('category_id').value;
         const arr = document.querySelector('select[name="arrondissement_id"]');
-        if (!cat) { alert('Veuillez sélectionner un type de problème.'); return; }
+        if (!domainId) { alert('Veuillez choisir un domaine (service concerné).'); return; }
+        if (!categoryId) { alert('Veuillez sélectionner un type de problème.'); return; }
         if (!arr.value) { alert('Veuillez sélectionner un arrondissement.'); return; }
     }
     if (from + 1 < totalSteps) showStep(from + 1);
@@ -301,6 +308,72 @@ function nextStep(from) {
 function prevStep(from) {
     if (from > 0) showStep(from - 1);
 }
+
+// ─── Domaine & Catégorie ──────────────────────────────────
+let selectedDomainId = '{{ old('domain_id') }}';
+let selectedCategoryId = '{{ old('category_id') }}';
+
+function selectDomain(domainId, domainName, domainColor) {
+    selectedDomainId = domainId;
+    document.getElementById('domain_id').value = domainId;
+    document.getElementById('category_id').value = '';
+    selectedCategoryId = '';
+
+    // Highlight selected card
+    document.querySelectorAll('.domain-card').forEach(card => {
+        card.classList.remove('border-green-500', 'bg-green-50');
+        card.classList.add('border-gray-200');
+    });
+    const selected = document.getElementById('domain-card-' + domainId);
+    selected.classList.add('border-green-500', 'bg-green-50');
+    selected.classList.remove('border-gray-200');
+
+    // Show categories section
+    document.getElementById('category-section').classList.remove('hidden');
+    document.getElementById('category-subtitle').textContent = 'Catégories du domaine : ' + domainName;
+    document.getElementById('category-loading').classList.remove('hidden');
+    document.getElementById('category-grid').innerHTML = '';
+
+    // Fetch categories for this domain
+    fetch('/api/domaines/' + domainId + '/categories', {
+        headers: { 'X-Requested-With': 'XMLHttpRequest', 'Accept': 'application/json' }
+    })
+    .then(r => r.json())
+    .then(categories => {
+        document.getElementById('category-loading').classList.add('hidden');
+        const grid = document.getElementById('category-grid');
+        if (categories.length === 0) {
+            grid.innerHTML = '<p class="col-span-3 text-sm text-gray-400 py-4">Aucune catégorie disponible pour ce domaine.</p>';
+            return;
+        }
+        categories.forEach(cat => {
+            const isSelected = String(cat.id) === String(selectedCategoryId);
+            grid.innerHTML += `
+            <label class="cursor-pointer">
+                <input type="radio" name="_cat" value="${cat.id}" class="sr-only peer" ${isSelected ? 'checked' : ''}
+                       onchange="document.getElementById('category_id').value=this.value">
+                <div class="p-3 border-2 ${isSelected ? 'border-green-500 bg-green-50' : 'border-gray-200'} rounded-xl text-center peer-checked:border-green-500 peer-checked:bg-green-50 hover:border-gray-300 transition">
+                    <div class="w-8 h-8 rounded-full mx-auto mb-2 flex items-center justify-center" style="background-color:${cat.color}20">
+                        <div class="w-3 h-3 rounded-full" style="background-color:${cat.color}"></div>
+                    </div>
+                    <p class="text-xs font-medium text-gray-700 leading-tight">${cat.name}</p>
+                </div>
+            </label>`;
+        });
+    })
+    .catch(() => {
+        document.getElementById('category-loading').classList.add('hidden');
+        document.getElementById('category-grid').innerHTML = '<p class="col-span-3 text-sm text-red-500 py-4">Erreur lors du chargement des catégories. Rechargez la page.</p>';
+    });
+}
+
+// Restore old values on page load (retour après erreur de validation)
+document.addEventListener('DOMContentLoaded', function() {
+    if (selectedDomainId) {
+        const card = document.getElementById('domain-card-' + selectedDomainId);
+        if (card) card.click();
+    }
+});
 
 // ─── Leaflet Map ─────────────────────────────────────────
 let map, marker;

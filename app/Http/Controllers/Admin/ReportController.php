@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Arrondissement;
 use App\Models\Category;
+use App\Models\Domain;
 use App\Models\Report;
+use App\Models\Team;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -13,9 +15,12 @@ class ReportController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Report::with(['category', 'arrondissement', 'user', 'team'])
+        $query = Report::with(['domain', 'category', 'arrondissement', 'user', 'team'])
             ->orderByDesc('created_at');
 
+        if ($request->filled('domain_id')) {
+            $query->where('domain_id', $request->domain_id);
+        }
         if ($request->filled('status')) {
             $query->where('status', $request->status);
         }
@@ -24,9 +29,6 @@ class ReportController extends Controller
         }
         if ($request->filled('arrondissement_id')) {
             $query->where('arrondissement_id', $request->arrondissement_id);
-        }
-        if ($request->filled('category_id')) {
-            $query->where('category_id', $request->category_id);
         }
         if ($request->filled('search')) {
             $search = $request->search;
@@ -37,17 +39,22 @@ class ReportController extends Controller
         }
 
         $reports         = $query->paginate(20)->appends($request->query());
+        $domains         = Domain::orderBy('name')->get();
         $arrondissements = Arrondissement::orderBy('name')->get();
-        $categories      = Category::orderBy('name')->get();
 
-        return view('admin.reports.index', compact('reports', 'arrondissements', 'categories'));
+        return view('admin.reports.index', compact('reports', 'domains', 'arrondissements'));
     }
 
     public function show(Report $report)
     {
-        $report->load(['category', 'arrondissement', 'user', 'team', 'assignedBy', 'statusHistories.changedBy', 'photos']);
+        $report->load(['domain', 'category', 'arrondissement', 'user', 'team', 'assignedBy', 'statusHistories.changedBy', 'photos']);
 
-        return view('admin.reports.show', compact('report'));
+        $teams = Team::where('is_active', true)
+            ->when($report->domain_id, fn($q) => $q->where('domain_id', $report->domain_id))
+            ->orderBy('name')
+            ->get();
+
+        return view('admin.reports.show', compact('report', 'teams'));
     }
 
     public function statistics()

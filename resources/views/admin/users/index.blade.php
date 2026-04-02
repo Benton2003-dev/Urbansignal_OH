@@ -65,19 +65,27 @@
                         </td>
                         <td class="px-5 py-3 text-xs text-gray-400">{{ $user->created_at->format('d/m/Y') }}</td>
                         <td class="px-5 py-3 text-right">
-                            <div class="flex items-center justify-end gap-2">
-                                <a href="{{ route('admin.users.edit', $user) }}" class="text-xs text-purple-600 hover:text-purple-800 font-medium transition">Modifier</a>
+                            <div class="flex items-center justify-end gap-1">
+                                <a href="{{ route('admin.users.edit', $user) }}" title="Modifier" class="p-1.5 rounded-lg text-gray-400 hover:text-purple-600 hover:bg-purple-50 transition">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+                                </a>
                                 @if($user->id !== auth()->id())
                                 <form action="{{ route('admin.users.toggle', $user) }}" method="POST" class="inline">
                                     @csrf @method('PATCH')
-                                    <button type="submit" class="text-xs {{ $user->is_active ? 'text-orange-500 hover:text-orange-700' : 'text-green-600 hover:text-green-800' }} font-medium transition">
-                                        {{ $user->is_active ? 'Désactiver' : 'Activer' }}
+                                    <button type="submit" title="{{ $user->is_active ? 'Désactiver' : 'Activer' }}" class="p-1.5 rounded-lg text-gray-400 {{ $user->is_active ? 'hover:text-orange-600 hover:bg-orange-50' : 'hover:text-green-600 hover:bg-green-50' }} transition">
+                                        @if($user->is_active)
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"/></svg>
+                                        @else
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                        @endif
                                     </button>
                                 </form>
                                 <form action="{{ route('admin.users.destroy', $user) }}" method="POST" class="inline"
                                       onsubmit="return confirm('Supprimer cet utilisateur ?')">
                                     @csrf @method('DELETE')
-                                    <button type="submit" class="text-xs text-red-500 hover:text-red-700 font-medium transition">Supprimer</button>
+                                    <button type="submit" title="Supprimer" class="p-1.5 rounded-lg text-gray-400 hover:text-red-600 hover:bg-red-50 transition">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+                                    </button>
                                 </form>
                                 @endif
                             </div>

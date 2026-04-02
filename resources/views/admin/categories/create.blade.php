@@ -23,6 +23,16 @@
         <form action="{{ route('admin.categories.store') }}" method="POST" class="space-y-5">
             @csrf
             <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Domaine <span class="text-red-500">*</span></label>
+                <select name="domain_id" required class="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 @error('domain_id') border-red-400 @enderror">
+                    <option value="">— Choisir un domaine —</option>
+                    @foreach($domains as $domain)
+                        <option value="{{ $domain->id }}" {{ old('domain_id') == $domain->id ? 'selected' : '' }}>{{ $domain->name }}</option>
+                    @endforeach
+                </select>
+                @error('domain_id')<p class="mt-1 text-xs text-red-600">{{ $message }}</p>@enderror
+            </div>
+            <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">Nom de la catégorie <span class="text-red-500">*</span></label>
                 <input type="text" name="name" value="{{ old('name') }}" required
                        class="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500">
