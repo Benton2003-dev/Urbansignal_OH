@@ -1,0 +1,159 @@
+@startuml UCU_UrbanSignal_Global
+title Diagramme de Cas d'Utilisation — UrbanSignal\nCommune de Ouidah
+
+left to right direction
+
+skinparam backgroundColor #FFFFFF
+skinparam defaultFontName Helvetica
+skinparam defaultFontSize 11
+skinparam actorStyle awesome
+
+skinparam usecase {
+  BackgroundColor #DBEAFE
+  BorderColor #1D4ED8
+  FontColor #1E3A5F
+  FontSize 11
+  BorderThickness 1.5
+}
+skinparam actor {
+  BackgroundColor #1B2F6E
+  FontColor #1B2F6E
+  FontSize 11
+  BorderColor #1B2F6E
+}
+skinparam package {
+  BackgroundColor #F8FAFF
+  BorderColor #2952A3
+  BorderThickness 2
+  FontColor #1B2F6E
+  FontStyle Bold
+  FontSize 12
+}
+skinparam ArrowColor #2952A3
+skinparam ArrowFontSize 9
+skinparam ArrowFontColor #2952A3
+
+' ─── Acteurs (empilés verticalement grâce aux liens cachés) ───
+actor "Visiteur"             as Visiteur
+actor "Citoyen"              as Citoyen
+actor "Agent technique"      as Agent
+actor "Administrateur"       as Admin
+actor "Super Administrateur" as SuperAdmin
+
+Visiteur  -[hidden]d-> Citoyen
+Citoyen   -[hidden]d-> Agent
+Agent     -[hidden]d-> Admin
+Admin     -[hidden]d-> SuperAdmin
+
+' Héritage
+Citoyen    -|> Visiteur
+Agent      -|> Visiteur
+Admin      -|> Visiteur
+
+' ─── Système ───────────────────────────────────────────────────
+rectangle "UrbanSignal — Système de signalement" {
+
+  package "Accès Public" {
+    usecase "Consulter l'accueil"           as UC01
+    usecase "Suivre un signalement\n(ticket)" as UC02
+    usecase "S'inscrire"                    as UC03
+    usecase "Se connecter"                  as UC04
+  }
+
+  package "Espace Citoyen" {
+    usecase "Créer un signalement"          as UC10
+    usecase "Choisir domaine & catégorie"   as UC11
+    usecase "Localiser le problème\n(adresse + GPS)" as UC12
+    usecase "Ajouter des photos"            as UC13
+    usecase "Consulter ses signalements"    as UC14
+    usecase "Voir détail d'un signalement"  as UC15
+    usecase "Gérer son profil"              as UC16
+    usecase "Se déconnecter"               as UC17
+  }
+
+  package "Espace Agent technique" {
+    usecase "Tableau de bord agent"         as UC20
+    usecase "Lister les signalements"       as UC21
+    usecase "Voir détail signalement"       as UC22
+    usecase "Mettre à jour le statut"       as UC23
+    usecase "Ajouter une note technique"    as UC24
+    usecase "Assigner une équipe"           as UC25
+    usecase "Carte des signalements"        as UC26
+  }
+
+  package "Espace Administrateur" {
+    usecase "Tableau de bord (KPIs)"        as UC30
+    usecase "Gérer les signalements"        as UC31
+    usecase "Consulter les statistiques"    as UC32
+    usecase "Gérer les utilisateurs"        as UC33
+    usecase "Gérer les domaines"            as UC34
+    usecase "Gérer les catégories"          as UC35
+    usecase "Gérer les équipes"             as UC36
+  }
+
+  package "Espace Super Administrateur" {
+    usecase "Tableau de bord système"       as UC40
+    usecase "Gérer utilisateurs\n(promouvoir / bannir)" as UC41
+    usecase "Réinitialiser mot de passe"    as UC42
+    usecase "Mode maintenance"              as UC43
+    usecase "Vider le cache"               as UC44
+    usecase "Paramètres système"            as UC45
+    usecase "Exporter les données (CSV)"    as UC46
+  }
+}
+
+' ─── Visiteur ──────────────────────────────────────────────────
+Visiteur --> UC01
+Visiteur --> UC02
+Visiteur --> UC03
+Visiteur --> UC04
+
+' ─── Citoyen ───────────────────────────────────────────────────
+Citoyen --> UC10
+Citoyen --> UC14
+Citoyen --> UC15
+Citoyen --> UC16
+Citoyen --> UC17
+
+UC10 .> UC11 : <<include>>
+UC10 .> UC12 : <<include>>
+UC10 .> UC13 : <<extend>>
+
+' ─── Agent ─────────────────────────────────────────────────────
+Agent --> UC20
+Agent --> UC21
+Agent --> UC22
+Agent --> UC23
+Agent --> UC25
+Agent --> UC26
+Agent --> UC16
+Agent --> UC17
+
+UC23 .> UC24 : <<extend>>
+
+' ─── Admin ─────────────────────────────────────────────────────
+Admin --> UC30
+Admin --> UC31
+Admin --> UC32
+Admin --> UC33
+Admin --> UC34
+Admin --> UC35
+Admin --> UC36
+Admin --> UC16
+Admin --> UC17
+
+UC35 .> UC34 : <<include>>
+UC36 .> UC34 : <<include>>
+
+' ─── SuperAdmin ────────────────────────────────────────────────
+SuperAdmin --> UC40
+SuperAdmin --> UC41
+SuperAdmin --> UC43
+SuperAdmin --> UC44
+SuperAdmin --> UC45
+SuperAdmin --> UC46
+SuperAdmin --> UC17
+
+UC41 .> UC42 : <<extend>>
+
+@enduml

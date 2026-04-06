@@ -8,7 +8,7 @@
             <h1 class="text-2xl font-bold text-gray-900">Domaines de signalement</h1>
             <p class="text-sm text-gray-500 mt-1">Gérez les domaines (Voirie, SBEE, SONEB, Assainissement…)</p>
         </div>
-        <a href="{{ route('admin.domains.create') }}" class="inline-flex items-center gap-2 px-4 py-2 bg-green-600 text-white font-medium rounded-lg hover:bg-green-700 transition text-sm">
+        <a href="{{ route('admin.domains.create') }}" class="inline-flex items-center gap-2 px-4 py-2 bg-blue-700 text-white font-medium rounded-lg hover:bg-blue-800 transition text-sm">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
             Nouveau domaine
         </a>
@@ -23,7 +23,7 @@
             <div class="flex-1 min-w-0">
                 <div class="flex items-center gap-2 mb-1">
                     <h3 class="text-base font-semibold text-gray-900 truncate">{{ $domain->name }}</h3>
-                    <span class="px-2 py-0.5 rounded-full text-xs font-medium {{ $domain->is_active ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-600' }}">
+                    <span class="px-2 py-0.5 rounded-full text-xs font-medium {{ $domain->is_active ? 'bg-green-100 text-blue-700' : 'bg-red-100 text-red-600' }}">
                         {{ $domain->is_active ? 'Actif' : 'Inactif' }}
                     </span>
                 </div>
@@ -44,7 +44,7 @@
                 </div>
             </div>
             <div class="flex items-center gap-1 ml-2">
-                <a href="{{ route('admin.domains.edit', $domain) }}" title="Modifier" class="p-1.5 rounded-lg text-gray-400 hover:text-green-600 hover:bg-green-50 transition">
+                <a href="{{ route('admin.domains.edit', $domain) }}" title="Modifier" class="p-1.5 rounded-lg text-gray-400 hover:text-blue-600 hover:bg-blue-50 transition">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
                 </a>
                 @if($domain->reports_count === 0)

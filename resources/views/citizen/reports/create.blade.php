@@ -27,10 +27,10 @@
         @foreach($stepLabels as $i => $label)
         <div class="flex items-center {{ $loop->last ? '' : 'flex-1' }}">
             <div class="step-indicator flex items-center justify-center w-8 h-8 rounded-full text-sm font-bold
-                {{ $i === 0 ? 'bg-green-600 text-white' : 'bg-gray-200 text-gray-400' }}" id="step-badge-{{ $i }}">
+                {{ $i === 0 ? 'bg-blue-700 text-white' : 'bg-gray-200 text-gray-400' }}" id="step-badge-{{ $i }}">
                 {{ $i + 1 }}
             </div>
-            <span class="ml-2 text-sm font-medium {{ $i === 0 ? 'text-green-700' : 'text-gray-400' }}" id="step-label-{{ $i }}">{{ $label }}</span>
+            <span class="ml-2 text-sm font-medium {{ $i === 0 ? 'text-blue-700' : 'text-gray-400' }}" id="step-label-{{ $i }}">{{ $label }}</span>
             @if(!$loop->last)
             <div class="flex-1 h-0.5 bg-gray-200 mx-3" id="step-line-{{ $i }}"></div>
             @endif
@@ -67,7 +67,7 @@
                 @foreach($domains as $domain)
                 <button type="button" onclick="selectDomain({{ $domain->id }}, '{{ $domain->name }}', '{{ $domain->color }}')"
                         id="domain-card-{{ $domain->id }}"
-                        class="domain-card p-4 border-2 border-gray-200 rounded-xl text-left hover:border-gray-300 transition {{ old('domain_id') == $domain->id ? 'border-green-500 bg-green-50' : '' }}">
+                        class="domain-card p-4 border-2 border-gray-200 rounded-xl text-left hover:border-gray-300 transition {{ old('domain_id') == $domain->id ? 'border-blue-500 bg-green-50' : '' }}">
                     <div class="flex items-center gap-3">
                         <div class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style="background-color: {{ $domain->color }}20">
                             <div class="w-4 h-4 rounded-full" style="background-color: {{ $domain->color }}"></div>
@@ -104,7 +104,7 @@
             <div class="mt-6">
                 <label class="block text-sm font-medium text-gray-700 mb-2">Arrondissement <span class="text-red-500">*</span></label>
                 <select name="arrondissement_id" required
-                        class="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-900">
+                        class="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900">
                     <option value="">Sélectionnez un arrondissement</option>
                     @foreach($arrondissements as $arr)
                     <option value="{{ $arr->id }}" {{ old('arrondissement_id') == $arr->id ? 'selected' : '' }}>{{ $arr->name }}</option>
@@ -113,7 +113,7 @@
             </div>
 
             <div class="flex justify-end mt-6">
-                <button type="button" onclick="nextStep(0)" class="px-6 py-2.5 bg-green-600 text-white font-semibold rounded-xl hover:bg-green-700 transition">
+                <button type="button" onclick="nextStep(0)" class="px-6 py-2.5 bg-blue-700 text-white font-semibold rounded-xl hover:bg-blue-800 transition">
                     Suivant →
                 </button>
             </div>
@@ -126,7 +126,7 @@
 
             {{-- GPS button --}}
             <button type="button" id="geoBtn"
-                    class="w-full flex items-center justify-center gap-2 px-4 py-3 border-2 border-dashed border-green-300 text-green-700 rounded-xl hover:bg-green-50 transition mb-3">
+                    class="w-full flex items-center justify-center gap-2 px-4 py-3 border-2 border-dashed border-green-300 text-blue-700 rounded-xl hover:bg-blue-50 transition mb-3">
                 <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0zM15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
                 <span id="geoBtnText" class="flex items-center gap-2">
                     <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0zM15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
@@ -159,18 +159,18 @@
                     <div>
                         <label class="block text-xs font-medium text-gray-600 mb-1">Latitude</label>
                         <input type="text" name="latitude" id="lat" placeholder="Ex: 6.3622"
-                               class="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-green-400"
+                               class="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-blue-400"
                                value="{{ old('latitude') }}">
                     </div>
                     <div>
                         <label class="block text-xs font-medium text-gray-600 mb-1">Longitude</label>
                         <input type="text" name="longitude" id="lng" placeholder="Ex: 2.0852"
-                               class="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-green-400"
+                               class="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-blue-400"
                                value="{{ old('longitude') }}">
                     </div>
                 </div>
                 <button type="button" onclick="applyManualCoords()"
-                        class="mt-2 text-xs text-green-700 underline hover:text-green-900 transition">
+                        class="mt-2 text-xs text-blue-700 underline hover:text-green-900 transition">
                     → Appliquer les coordonnées saisies manuellement
                 </button>
             </div>
@@ -178,7 +178,7 @@
             <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">Adresse ou repère (optionnel)</label>
                 <input type="text" name="address" placeholder="Ex: Rue de la Paix, près du marché central de Ouidah"
-                       class="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-900"
+                       class="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900"
                        value="{{ old('address') }}">
             </div>
 
@@ -186,7 +186,7 @@
                 <button type="button" onclick="prevStep(1)" class="px-5 py-2.5 border border-gray-200 text-gray-600 font-medium rounded-xl hover:bg-gray-50 transition">
                     ← Précédent
                 </button>
-                <button type="button" onclick="nextStep(1)" class="px-6 py-2.5 bg-green-600 text-white font-semibold rounded-xl hover:bg-green-700 transition">
+                <button type="button" onclick="nextStep(1)" class="px-6 py-2.5 bg-blue-700 text-white font-semibold rounded-xl hover:bg-blue-800 transition">
                     Suivant →
                 </button>
             </div>
@@ -198,7 +198,7 @@
             <p class="text-sm text-gray-500 mb-5">Ajoutez jusqu'à 5 photos (max 5 Mo chacune). Les formats acceptés : JPEG, PNG, WEBP.</p>
 
             <label class="block cursor-pointer">
-                <div class="flex flex-col items-center justify-center px-6 py-12 border-2 border-dashed border-gray-300 rounded-xl hover:border-green-400 hover:bg-green-50 transition">
+                <div class="flex flex-col items-center justify-center px-6 py-12 border-2 border-dashed border-gray-300 rounded-xl hover:border-green-400 hover:bg-blue-50 transition">
                     <svg class="w-10 h-10 text-gray-300 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/>
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/>
@@ -214,7 +214,7 @@
                 <button type="button" onclick="prevStep(2)" class="px-5 py-2.5 border border-gray-200 text-gray-600 font-medium rounded-xl hover:bg-gray-50 transition">
                     ← Précédent
                 </button>
-                <button type="button" onclick="nextStep(2)" class="px-6 py-2.5 bg-green-600 text-white font-semibold rounded-xl hover:bg-green-700 transition">
+                <button type="button" onclick="nextStep(2)" class="px-6 py-2.5 bg-blue-700 text-white font-semibold rounded-xl hover:bg-blue-800 transition">
                     Suivant →
                 </button>
             </div>
@@ -228,7 +228,7 @@
                 <label class="block text-sm font-medium text-gray-700 mb-1">Titre du signalement <span class="text-red-500">*</span></label>
                 <input type="text" name="title" required maxlength="255"
                        placeholder="Ex: Grand nid-de-poule sur la route de Fidjrossè"
-                       class="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-900"
+                       class="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900"
                        value="{{ old('title') }}">
             </div>
 
@@ -236,7 +236,7 @@
                 <label class="block text-sm font-medium text-gray-700 mb-1">Description détaillée <span class="text-red-500">*</span></label>
                 <textarea name="description" required rows="5" maxlength="2000"
                           placeholder="Décrivez le problème en détail : sa taille approximative, depuis combien de temps il existe, quel impact il a sur la circulation..."
-                          class="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-900 resize-none">{{ old('description') }}</textarea>
+                          class="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900 resize-none">{{ old('description') }}</textarea>
                 <p class="text-xs text-gray-400 mt-1">Maximum 2000 caractères.</p>
             </div>
 
@@ -251,7 +251,7 @@
                 <button type="button" onclick="prevStep(3)" class="px-5 py-2.5 border border-gray-200 text-gray-600 font-medium rounded-xl hover:bg-gray-50 transition">
                     ← Précédent
                 </button>
-                <button type="submit" class="px-8 py-2.5 bg-green-600 text-white font-bold rounded-xl hover:bg-green-700 transition shadow-sm flex items-center gap-2">
+                <button type="submit" class="px-8 py-2.5 bg-blue-700 text-white font-bold rounded-xl hover:bg-blue-800 transition shadow-sm flex items-center gap-2">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>
                     Soumettre le signalement
                 </button>
@@ -275,16 +275,16 @@ function showStep(step) {
         const badge = document.getElementById('step-badge-' + i);
         const label = document.getElementById('step-label-' + i);
         if (i < step) {
-            badge.className = badge.className.replace('bg-gray-200 text-gray-400', '').replace('bg-green-600 text-white', '') + ' bg-green-100 text-green-700';
+            badge.className = badge.className.replace('bg-gray-200 text-gray-400', '').replace('bg-blue-700 text-white', '') + ' bg-green-100 text-blue-700';
             badge.innerHTML = '✓';
         } else if (i === step) {
-            badge.className = badge.className.replace('bg-gray-200 text-gray-400', '').replace('bg-green-100 text-green-700', '') + ' bg-green-600 text-white';
+            badge.className = badge.className.replace('bg-gray-200 text-gray-400', '').replace('bg-green-100 text-blue-700', '') + ' bg-blue-700 text-white';
             badge.innerHTML = i + 1;
-            label.className = label.className.replace('text-gray-400', 'text-green-700 font-semibold');
+            label.className = label.className.replace('text-gray-400', 'text-blue-700 font-semibold');
         } else {
-            badge.className = badge.className.replace('bg-green-600 text-white', '').replace('bg-green-100 text-green-700', '') + ' bg-gray-200 text-gray-400';
+            badge.className = badge.className.replace('bg-blue-700 text-white', '').replace('bg-green-100 text-blue-700', '') + ' bg-gray-200 text-gray-400';
             badge.innerHTML = i + 1;
-            label.className = label.className.replace('text-green-700 font-semibold', 'text-gray-400');
+            label.className = label.className.replace('text-blue-700 font-semibold', 'text-gray-400');
         }
     }
     document.getElementById('step-' + step).classList.remove('hidden');
@@ -321,11 +321,11 @@ function selectDomain(domainId, domainName, domainColor) {
 
     // Highlight selected card
     document.querySelectorAll('.domain-card').forEach(card => {
-        card.classList.remove('border-green-500', 'bg-green-50');
+        card.classList.remove('border-blue-500', 'bg-green-50');
         card.classList.add('border-gray-200');
     });
     const selected = document.getElementById('domain-card-' + domainId);
-    selected.classList.add('border-green-500', 'bg-green-50');
+    selected.classList.add('border-blue-500', 'bg-green-50');
     selected.classList.remove('border-gray-200');
 
     // Show categories section
@@ -352,7 +352,7 @@ function selectDomain(domainId, domainName, domainColor) {
             <label class="cursor-pointer">
                 <input type="radio" name="_cat" value="${cat.id}" class="sr-only peer" ${isSelected ? 'checked' : ''}
                        onchange="document.getElementById('category_id').value=this.value">
-                <div class="p-3 border-2 ${isSelected ? 'border-green-500 bg-green-50' : 'border-gray-200'} rounded-xl text-center peer-checked:border-green-500 peer-checked:bg-green-50 hover:border-gray-300 transition">
+                <div class="p-3 border-2 ${isSelected ? 'border-blue-500 bg-green-50' : 'border-gray-200'} rounded-xl text-center peer-checked:border-blue-500 peer-checked:bg-green-50 hover:border-gray-300 transition">
                     <div class="w-8 h-8 rounded-full mx-auto mb-2 flex items-center justify-center" style="background-color:${cat.color}20">
                         <div class="w-3 h-3 rounded-full" style="background-color:${cat.color}"></div>
                     </div>
@@ -460,7 +460,7 @@ document.getElementById('geoBtn').addEventListener('click', function() {
             document.getElementById('geoNotice').classList.add('hidden');
             setMarker(pos.coords.latitude, pos.coords.longitude);
             btn.innerHTML = '<svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> Position GPS détectée avec succès !';
-            document.getElementById('geoBtn').classList.add('border-green-500', 'bg-green-50');
+            document.getElementById('geoBtn').classList.add('border-blue-500', 'bg-green-50');
         },
         // Erreur
         function(err) {

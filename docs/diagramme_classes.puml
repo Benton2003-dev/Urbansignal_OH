@@ -1,0 +1,282 @@
+@startuml DiagrammeClasses_UrbanSignal
+title Diagramme de Classes — UrbanSignal | Commune de Ouidah
+
+top to bottom direction
+skinparam linetype ortho
+skinparam defaultFontName Helvetica
+skinparam defaultFontSize 11
+
+skinparam class {
+  BackgroundColor #EBF1FA
+  BorderColor #2952A3
+  BorderThickness 1.5
+  FontColor #0D1B3E
+  FontSize 11
+  HeaderBackgroundColor #1B2F6E
+  HeaderFontColor #FFFFFF
+  HeaderFontSize 12
+  AttributeFontSize 10
+  StereotypeFontSize 9
+}
+
+skinparam enum {
+  BackgroundColor #FFF8E7
+  BorderColor #D97706
+  BorderThickness 1.5
+  FontColor #92400E
+  FontSize 11
+  HeaderBackgroundColor #D97706
+  HeaderFontColor #FFFFFF
+  HeaderFontSize 12
+}
+
+skinparam arrow {
+  Color #2952A3
+  FontColor #2952A3
+  FontSize 10
+  Thickness 1.5
+}
+
+skinparam note {
+  BackgroundColor #FFFBEB
+  BorderColor #D97706
+  FontSize 10
+}
+
+skinparam backgroundColor #FFFFFF
+
+' ══════════════════════════════════════
+'  ÉNUMÉRATIONS
+' ══════════════════════════════════════
+
+enum RoleEnum {
+  citizen
+  agent
+  admin
+  superadmin
+}
+
+enum StatusEnum {
+  submitted
+  validated
+  in_progress
+  resolved
+  archived
+}
+
+enum PriorityEnum {
+  low
+  medium
+  high
+  urgent
+}
+
+' ══════════════════════════════════════
+'  CLASSE User
+' ══════════════════════════════════════
+
+class User {
+  + id : int
+  + name : string
+  + email : string
+  + phone : string [nullable]
+  + role : RoleEnum
+  + arrondissement : string [nullable]
+  + avatar : string [nullable]
+  + is_active : boolean = true
+  + password : string
+  + email_verified_at : datetime [nullable]
+  + created_at : datetime
+  + updated_at : datetime
+  ..
+  + isSuperAdmin() : boolean
+  + isAdmin() : boolean
+  + isAgent() : boolean
+  + isCitizen() : boolean
+}
+
+' ══════════════════════════════════════
+'  CLASSE Domain
+' ══════════════════════════════════════
+
+class Domain {
+  + id : int
+  + name : string
+  + slug : string
+  + description : text [nullable]
+  + color : string [nullable]
+  + icon : string [nullable]
+  + is_active : boolean = true
+  + created_at : datetime
+  + updated_at : datetime
+}
+
+' ══════════════════════════════════════
+'  CLASSE Category
+' ══════════════════════════════════════
+
+class Category {
+  + id : int
+  + domain_id : int <<FK>>
+  + name : string
+  + slug : string
+  + description : text [nullable]
+  + icon : string [nullable]
+  + color : string [nullable]
+  + is_active : boolean = true
+  + created_at : datetime
+  + updated_at : datetime
+}
+
+' ══════════════════════════════════════
+'  CLASSE Team
+' ══════════════════════════════════════
+
+class Team {
+  + id : int
+  + domain_id : int <<FK>>
+  + name : string
+  + description : text [nullable]
+  + contact_phone : string [nullable]
+  + contact_email : string [nullable]
+  + is_active : boolean = true
+  + created_at : datetime
+  + updated_at : datetime
+}
+
+' ══════════════════════════════════════
+'  CLASSE Arrondissement
+' ══════════════════════════════════════
+
+class Arrondissement {
+  + id : int
+  + name : string
+  + code : string [nullable]
+  + description : text [nullable]
+  + is_active : boolean = true
+  + created_at : datetime
+  + updated_at : datetime
+}
+
+' ══════════════════════════════════════
+'  CLASSE Report
+' ══════════════════════════════════════
+
+class Report {
+  + id : int
+  + ticket_number : string <<unique>>
+  + user_id : int <<FK>>
+  + domain_id : int <<FK>>
+  + category_id : int <<FK>>
+  + arrondissement_id : int <<FK>>
+  + assigned_team_id : int <<FK>> [nullable]
+  + assigned_by : int <<FK>> [nullable]
+  + title : string
+  + description : text
+  + latitude : decimal(10,7) [nullable]
+  + longitude : decimal(10,7) [nullable]
+  + address : string [nullable]
+  + status : StatusEnum = submitted
+  + priority : PriorityEnum = medium
+  + agent_notes : text [nullable]
+  + resolved_at : datetime [nullable]
+  + created_at : datetime
+  + updated_at : datetime
+  ..
+  + getStatusLabelAttribute() : string
+  + getPriorityLabelAttribute() : string
+}
+
+' ══════════════════════════════════════
+'  CLASSE ReportPhoto
+' ══════════════════════════════════════
+
+class ReportPhoto {
+  + id : int
+  + report_id : int <<FK>>
+  + path : string
+  + original_name : string [nullable]
+  + size : int [nullable]
+  + created_at : datetime
+  + updated_at : datetime
+  ..
+  + getUrlAttribute() : string
+}
+
+' ══════════════════════════════════════
+'  CLASSE ReportStatusHistory
+' ══════════════════════════════════════
+
+class ReportStatusHistory {
+  + id : int
+  + report_id : int <<FK>>
+  + changed_by : int <<FK>>
+  + old_status : StatusEnum [nullable]
+  + new_status : StatusEnum
+  + comment : text [nullable]
+  + created_at : datetime
+  + updated_at : datetime
+  ..
+  + getNewStatusLabelAttribute() : string
+  + getOldStatusLabelAttribute() : string
+}
+
+' ══════════════════════════════════════
+'  RELATIONS
+' ══════════════════════════════════════
+
+' Enums
+User    "1" --   "1"    RoleEnum       : role >
+Report  "1" --   "1"    StatusEnum     : statut >
+Report  "1" --   "1"    PriorityEnum   : priorité >
+
+' Domain → Category / Team
+Domain  "1" *--  "1..*" Category       : contient >
+Domain  "1" *--  "0..*" Team           : dispose de >
+
+' User → Report
+User    "1" o--  "0..*" Report         : soumet >
+User    "1" o--  "0..*" Report         : assigne (assigned_by) >
+User    "1" o--  "0..*" ReportStatusHistory : modifie >
+
+' Report → dimensions
+Domain         "1" o-- "0..*" Report : concerne >
+Category       "1" o-- "0..*" Report : classifie >
+Arrondissement "1" o-- "0..*" Report : localise >
+Team        "0..1" o-- "0..*" Report : est assignée à >
+
+' Report → compositions
+Report "1" *-- "0..*" ReportPhoto         : comporte >
+Report "1" *-- "1..*" ReportStatusHistory : trace >
+
+' ══════════════════════════════════════
+'  NOTES
+' ══════════════════════════════════════
+
+note top of User
+  4 rôles (ENUM MySQL) :
+  citizen / agent / admin / superadmin
+  is_active = false bloque la connexion
+end note
+
+note right of Report
+  ticket_number auto-généré :
+  format US-AAAA-NNNNN
+  Cycle : submitted → validated
+  → in_progress → resolved → archived
+end note
+
+note bottom of Domain
+  Hiérarchie :
+  Domain → Category (types de problèmes)
+  Domain → Team (équipes d'intervention)
+end note
+
+note right of ReportStatusHistory
+  Chaque changement de statut
+  est tracé : auteur, ancien
+  statut, nouveau statut,
+  commentaire optionnel.
+end note
+
+@enduml

@@ -16,7 +16,17 @@ class HomeController extends Controller
             'submitted'   => Report::where('status', 'submitted')->count(),
         ];
 
-        return view('home', compact('stats'));
+        $urgentCount = Report::where('priority', 'urgent')
+            ->whereNotIn('status', ['resolved', 'archived'])
+            ->count();
+
+        $recentReports = Report::with(['category', 'arrondissement'])
+            ->whereNotIn('status', ['archived'])
+            ->latest()
+            ->take(6)
+            ->get();
+
+        return view('home', compact('stats', 'urgentCount', 'recentReports'));
     }
 
     public function track(Request $request)

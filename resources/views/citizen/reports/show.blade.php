@@ -46,10 +46,10 @@
                     @php $idx = array_search($key, $stepKeys); @endphp
                     <div class="flex-1 flex flex-col items-center">
                         <div class="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold
-                            {{ $idx < $currentIdx ? 'bg-green-500 text-white' : ($idx === $currentIdx ? 'bg-green-600 text-white ring-4 ring-green-100' : 'bg-gray-200 text-gray-400') }}">
+                            {{ $idx < $currentIdx ? 'bg-green-500 text-white' : ($idx === $currentIdx ? 'bg-blue-700 text-white ring-4 ring-green-100' : 'bg-gray-200 text-gray-400') }}">
                             @if($idx < $currentIdx) ✓ @else {{ $idx+1 }} @endif
                         </div>
-                        <p class="text-xs mt-1 {{ $idx <= $currentIdx ? 'text-green-700 font-medium' : 'text-gray-400' }}">{{ $label }}</p>
+                        <p class="text-xs mt-1 {{ $idx <= $currentIdx ? 'text-blue-700 font-medium' : 'text-gray-400' }}">{{ $label }}</p>
                     </div>
                     @if(!$loop->last)
                     <div class="h-0.5 flex-1 -mt-5 {{ $idx < $currentIdx ? 'bg-green-400' : 'bg-gray-200' }}"></div>
@@ -100,7 +100,7 @@
                     @foreach($report->statusHistories->sortByDesc('created_at') as $history)
                     <div class="flex items-start gap-3">
                         <div class="mt-1 w-8 h-8 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
-                            <svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                            <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                         </div>
                         <div class="flex-1">
                             <div class="flex items-center gap-2 flex-wrap">
@@ -150,7 +150,7 @@
                     @if($report->resolved_at)
                     <div>
                         <dt class="text-xs text-gray-400">Résolu le</dt>
-                        <dd class="text-sm font-medium text-green-700">{{ $report->resolved_at->format('d/m/Y') }}</dd>
+                        <dd class="text-sm font-medium text-blue-700">{{ $report->resolved_at->format('d/m/Y') }}</dd>
                     </div>
                     @endif
                 </dl>

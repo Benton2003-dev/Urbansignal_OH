@@ -24,7 +24,7 @@
             @csrf @method('PUT')
             <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">Domaine <span class="text-red-500">*</span></label>
-                <select name="domain_id" required class="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 @error('domain_id') border-red-400 @enderror">
+                <select name="domain_id" required class="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 @error('domain_id') border-red-400 @enderror">
                     <option value="">— Choisir un domaine —</option>
                     @foreach($domains as $domain)
                         <option value="{{ $domain->id }}" {{ old('domain_id', $category->domain_id) == $domain->id ? 'selected' : '' }}>{{ $domain->name }}</option>
@@ -35,11 +35,11 @@
             <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">Nom</label>
                 <input type="text" name="name" value="{{ old('name', $category->name) }}" required
-                       class="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500">
+                       class="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500">
             </div>
             <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">Description</label>
-                <textarea name="description" rows="3" class="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 resize-none">{{ old('description', $category->description) }}</textarea>
+                <textarea name="description" rows="3" class="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none">{{ old('description', $category->description) }}</textarea>
             </div>
             <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">Couleur</label>
@@ -49,12 +49,12 @@
                 </div>
             </div>
             <div class="flex items-center gap-3">
-                <input type="checkbox" name="is_active" id="is_active" value="1" {{ $category->is_active?'checked':'' }} class="w-4 h-4 text-green-600 rounded">
+                <input type="checkbox" name="is_active" id="is_active" value="1" {{ $category->is_active?'checked':'' }} class="w-4 h-4 text-blue-600 rounded">
                 <label for="is_active" class="text-sm font-medium text-gray-700">Catégorie active</label>
             </div>
             <div class="flex justify-end gap-3 pt-2">
                 <a href="{{ route('admin.categories.index') }}" class="px-5 py-2.5 border border-gray-200 text-gray-600 font-medium rounded-xl hover:bg-gray-50 transition">Annuler</a>
-                <button type="submit" class="px-6 py-2.5 bg-green-600 text-white font-semibold rounded-xl hover:bg-green-700 transition">Sauvegarder</button>
+                <button type="submit" class="px-6 py-2.5 bg-blue-700 text-white font-semibold rounded-xl hover:bg-blue-800 transition">Sauvegarder</button>
             </div>
         </form>
     </div>

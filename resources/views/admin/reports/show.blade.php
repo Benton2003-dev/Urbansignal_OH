@@ -29,7 +29,7 @@
                         <h1 class="text-xl font-bold text-gray-900 mt-1">{{ $report->title }}</h1>
                         <p class="text-sm text-gray-500 mt-1">{{ $report->category->name }} • {{ $report->arrondissement->name ?? '—' }}</p>
                     </div>
-                    @php $sc=['submitted'=>'bg-gray-100 text-gray-700','validated'=>'bg-blue-100 text-blue-700','in_progress'=>'bg-yellow-100 text-yellow-800','resolved'=>'bg-green-100 text-green-800','archived'=>'bg-slate-100 text-slate-600']; @endphp
+                    @php $sc=['submitted'=>'bg-gray-100 text-gray-700','validated'=>'bg-blue-100 text-blue-700','in_progress'=>'bg-yellow-100 text-yellow-800','resolved'=>'bg-green-100 text-blue-800','archived'=>'bg-slate-100 text-slate-600']; @endphp
                     <span class="px-3 py-1.5 rounded-full text-sm font-medium {{ $sc[$report->status]??'' }}">{{ $report->status_label }}</span>
                 </div>
                 <div class="mt-4 pt-4 border-t border-gray-100">

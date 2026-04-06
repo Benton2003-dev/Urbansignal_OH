@@ -17,7 +17,7 @@
 
             <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">Domaine <span class="text-red-500">*</span></label>
-                <select name="domain_id" required class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-green-400 @error('domain_id') border-red-400 @enderror">
+                <select name="domain_id" required class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 @error('domain_id') border-red-400 @enderror">
                     <option value="">— Choisir un domaine —</option>
                     @foreach($domains as $domain)
                         <option value="{{ $domain->id }}" {{ old('domain_id') == $domain->id ? 'selected' : '' }}>{{ $domain->name }}</option>
@@ -29,31 +29,31 @@
             <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">Nom de l'équipe <span class="text-red-500">*</span></label>
                 <input type="text" name="name" value="{{ old('name') }}" required placeholder="Ex : Équipe SBEE Zone A"
-                       class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-green-400 @error('name') border-red-400 @enderror">
+                       class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 @error('name') border-red-400 @enderror">
                 @error('name')<p class="mt-1 text-xs text-red-600">{{ $message }}</p>@enderror
             </div>
 
             <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">Description</label>
                 <textarea name="description" rows="3" placeholder="Zone couverte, spécialité…"
-                          class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-green-400">{{ old('description') }}</textarea>
+                          class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-400">{{ old('description') }}</textarea>
             </div>
 
             <div class="grid grid-cols-2 gap-4">
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Téléphone</label>
                     <input type="text" name="contact_phone" value="{{ old('contact_phone') }}" placeholder="+229 97 00 00 00"
-                           class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-green-400">
+                           class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-400">
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
                     <input type="email" name="contact_email" value="{{ old('contact_email') }}" placeholder="equipe@exemple.bj"
-                           class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-green-400">
+                           class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-400">
                 </div>
             </div>
 
             <div class="pt-2 flex gap-3">
-                <button type="submit" class="px-5 py-2 bg-green-600 text-white text-sm font-semibold rounded-lg hover:bg-green-700 transition">
+                <button type="submit" class="px-5 py-2 bg-blue-700 text-white text-sm font-semibold rounded-lg hover:bg-blue-800 transition">
                     Créer l'équipe
                 </button>
                 <a href="{{ route('admin.teams.index') }}" class="px-5 py-2 border border-gray-300 text-gray-700 text-sm font-medium rounded-lg hover:bg-gray-50 transition">

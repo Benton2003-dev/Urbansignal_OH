@@ -53,13 +53,13 @@
                         </td>
                         <td class="px-5 py-3 text-sm text-gray-600">{{ $user->phone ?? '—' }}</td>
                         <td class="px-5 py-3">
-                            @php $roleColors = ['admin'=>'bg-purple-100 text-purple-700','agent'=>'bg-blue-100 text-blue-700','citizen'=>'bg-green-100 text-green-700']; @endphp
+                            @php $roleColors = ['admin'=>'bg-purple-100 text-purple-700','agent'=>'bg-blue-100 text-blue-700','citizen'=>'bg-green-100 text-blue-700']; @endphp
                             <span class="px-2.5 py-1 rounded-full text-xs font-medium {{ $roleColors[$user->role] ?? 'bg-gray-100 text-gray-600' }}">
                                 {{ ucfirst($user->role === 'citizen' ? 'Citoyen' : ($user->role === 'agent' ? 'Agent' : 'Admin')) }}
                             </span>
                         </td>
                         <td class="px-5 py-3">
-                            <span class="px-2.5 py-1 rounded-full text-xs font-medium {{ $user->is_active ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-600' }}">
+                            <span class="px-2.5 py-1 rounded-full text-xs font-medium {{ $user->is_active ? 'bg-green-100 text-blue-700' : 'bg-red-100 text-red-600' }}">
                                 {{ $user->is_active ? 'Actif' : 'Désactivé' }}
                             </span>
                         </td>
@@ -72,7 +72,7 @@
                                 @if($user->id !== auth()->id())
                                 <form action="{{ route('admin.users.toggle', $user) }}" method="POST" class="inline">
                                     @csrf @method('PATCH')
-                                    <button type="submit" title="{{ $user->is_active ? 'Désactiver' : 'Activer' }}" class="p-1.5 rounded-lg text-gray-400 {{ $user->is_active ? 'hover:text-orange-600 hover:bg-orange-50' : 'hover:text-green-600 hover:bg-green-50' }} transition">
+                                    <button type="submit" title="{{ $user->is_active ? 'Désactiver' : 'Activer' }}" class="p-1.5 rounded-lg text-gray-400 {{ $user->is_active ? 'hover:text-orange-600 hover:bg-orange-50' : 'hover:text-blue-600 hover:bg-blue-50' }} transition">
                                         @if($user->is_active)
                                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"/></svg>
                                         @else

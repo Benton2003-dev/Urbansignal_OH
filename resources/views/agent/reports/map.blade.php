@@ -30,7 +30,7 @@
         <div class="space-y-2 mb-4">
             <div>
                 <label class="block text-xs font-semibold text-gray-500 mb-1">Filtrer par statut</label>
-                <select id="filterStatus" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-green-400 bg-white">
+                <select id="filterStatus" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-blue-400 bg-white">
                     <option value="">— Tous les statuts —</option>
                     @foreach(['submitted'=>'Soumis','validated'=>'Validé','in_progress'=>'En cours','resolved'=>'Résolu'] as $v => $l)
                     <option value="{{ $v }}">{{ $l }}</option>
@@ -39,7 +39,7 @@
             </div>
             <div>
                 <label class="block text-xs font-semibold text-gray-500 mb-1">Filtrer par priorité</label>
-                <select id="filterPriority" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-green-400 bg-white">
+                <select id="filterPriority" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-blue-400 bg-white">
                     <option value="">— Toutes priorités —</option>
                     @foreach(['urgent'=>'Urgent','high'=>'Élevé','medium'=>'Moyen','low'=>'Faible'] as $v => $l)
                     <option value="{{ $v }}">{{ $l }}</option>
@@ -157,7 +157,7 @@ function renderMarkers() {
 
         // Item dans la liste latérale
         const item = document.createElement('div');
-        item.className = 'p-2 rounded-lg border border-gray-100 hover:bg-green-50 cursor-pointer transition text-left';
+        item.className = 'p-2 rounded-lg border border-gray-100 hover:bg-blue-50 cursor-pointer transition text-left';
         item.innerHTML = `
             <div style="display:flex;align-items:center;gap:6px;margin-bottom:2px">
                 <span style="width:8px;height:8px;border-radius:50%;background:${priorityColors[r.priority]||'#6B7280'};flex-shrink:0;display:inline-block"></span>

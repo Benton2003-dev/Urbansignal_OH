@@ -110,7 +110,7 @@
             @php
                 $barPx          = $m['total'] > 0 ? max(round($m['total'] / $maxMonthly * $maxBarPx), 8) : 4;
                 $isCurrentMonth = $m['period'] === now()->format('Y-m');
-                $barClass       = $isCurrentMonth ? 'bg-green-500 hover:bg-green-600' : ($m['total'] > 0 ? 'bg-green-300 hover:bg-green-400' : 'bg-gray-100');
+                $barClass       = $isCurrentMonth ? 'bg-green-500 hover:bg-blue-700' : ($m['total'] > 0 ? 'bg-green-300 hover:bg-green-400' : 'bg-gray-100');
             @endphp
             <div class="flex-1 flex flex-col items-center group" style="height: 100%; justify-content: flex-end; position: relative;">
                 {{-- Valeur au survol --}}

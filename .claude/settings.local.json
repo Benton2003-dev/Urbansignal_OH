@@ -1,7 +1,51 @@
 {
   "permissions": {
     "allow": [
-      "Bash(php -r \"require ''vendor/autoload.php''; echo ''OK'';\")"
+      "Bash(php -r \"require ''vendor/autoload.php''; echo ''OK'';\")",
+      "Bash(mkdir -p c:/wamp64/www/laravel11/UrbanSignal/app/Http/Controllers/SuperAdmin)",
+      "Bash(mkdir -p c:/wamp64/www/laravel11/UrbanSignal/resources/views/superadmin)",
+      "Bash(cp /tmp/superadmin_dashboard.txt resources/views/superadmin/dashboard.blade.php)",
+      "Bash(cp /tmp/superadmin_users.txt resources/views/superadmin/users.blade.php)",
+      "Bash(cp /tmp/superadmin_maintenance.txt resources/views/superadmin/maintenance.blade.php)",
+      "Bash(cp /tmp/superadmin_settings.txt resources/views/superadmin/settings.blade.php)",
+      "Bash(find . -name '*.blade.php' ! -path './superadmin/*' -exec sed -i -e s/hover:bg-green-50/hover:bg-blue-50/g -e 's/bg-green-50 border-green-200/bg-green-50 border-green-200/g' '{}' ';')",
+      "Bash(find . -name '*.blade.php' ! -path './superadmin/*' -exec sed -i -e s/focus:ring-green-400/focus:ring-blue-400/g '{}' ';')",
+      "Read(//tmp/**)",
+      "Bash(cp /tmp/dev_login.txt c:/wamp64/www/laravel11/UrbanSignal/resources/views/auth/login.blade.php)",
+      "Bash(cp /tmp/dev_register.txt c:/wamp64/www/laravel11/UrbanSignal/resources/views/auth/register.blade.php)",
+      "Bash(cp /tmp/dev_admin_dashboard.txt c:/wamp64/www/laravel11/UrbanSignal/resources/views/admin/dashboard.blade.php)",
+      "Bash(cp /tmp/dev_agent_dashboard.txt c:/wamp64/www/laravel11/UrbanSignal/resources/views/agent/dashboard.blade.php)",
+      "Bash(cp /tmp/dev_citizen_dashboard.txt c:/wamp64/www/laravel11/UrbanSignal/resources/views/citizen/dashboard.blade.php)",
+      "Bash(grep -n \"\\\\$[a-zA-Z]\" c:/wamp64/www/laravel11/UrbanSignal/resources/views/citizen/dashboard.blade.php)",
+      "Bash(grep -v \"//\")",
+      "Bash(grep -oP '\\\\$[a-zA-Z]+')",
+      "Bash(grep -n '$reports\\\\|$stats\\\\|$kpis\\\\|$' c:/wamp64/www/laravel11/UrbanSignal/resources/views/citizen/dashboard.blade.php)",
+      "Bash(grep -v \"^\\\\s*//\")",
+      "Bash(grep -n 'stats\\\\['\\\\''\\\\|reports\\\\b\\\\|$reports\\\\|$stats' c:/wamp64/www/laravel11/UrbanSignal/resources/views/citizen/dashboard.blade.php)",
+      "Bash(grep -n \"stats\\\\[\\\\|recentReports\\\\|kpis\\\\|\\\\$\" c:/wamp64/www/laravel11/UrbanSignal/resources/views/agent/dashboard.blade.php)",
+      "Bash(grep \"\\\\$\")",
+      "Bash(grep -n 'stats\\\\['\\\\''\\\\|$stats\\\\|$recent\\\\|$users\\\\|$reports\\\\|$categories' c:/wamp64/www/laravel11/UrbanSignal/resources/views/admin/dashboard.blade.php)",
+      "Bash(grep -n \"categoryStats\\\\|recentReports\\\\|quickLinks\\\\|\\\\$\" c:/wamp64/www/laravel11/UrbanSignal/resources/views/admin/dashboard.blade.php)",
+      "Bash(grep \"\\\\$[a-z]\")",
+      "Bash(grep -n 'byStatus\\\\|byCategory\\\\|monthlyData\\\\|recentUsers\\\\|quickLinks\\\\|$by\\\\|$monthly\\\\|$recent' c:/wamp64/www/laravel11/UrbanSignal/resources/views/admin/dashboard.blade.php)",
+      "Bash(grep -n '$report\\\\b' c:/wamp64/www/laravel11/UrbanSignal/resources/views/track.blade.php)",
+      "Bash(grep -n '$report\\\\b' /tmp/dev_track.txt)",
+      "Bash(php -r ':*)",
+      "Bash(find /c/wamp64/www/laravel11/UrbanSignal/resources/views -name '*.blade.php' -exec sed -i -e 's/'\\\\''Playfair Display'\\\\'', serif/'\\\\''Montserrat'\\\\'', sans-serif/g' -e 's/\"Playfair Display\", serif/\"Montserrat\", sans-serif/g' -e 's/'\\\\''Outfit'\\\\'', sans-serif/'\\\\''Poppins'\\\\'', sans-serif/g' -e 's/\"Outfit\", sans-serif/\"Poppins\", sans-serif/g' -e 's/'\\\\''Syne'\\\\'', sans-serif/'\\\\''Montserrat'\\\\'', sans-serif/g' -e 's/\"Syne\", sans-serif/\"Montserrat\", sans-serif/g' '{}' +)",
+      "Bash(npm run:*)",
+      "Bash(find /c/wamp64/www/laravel11/UrbanSignal/resources/views -name '*.blade.php' -exec sed -i -e 's/#254F38/#1a2b62/g' -e 's/rgba\\(25,61,43,\\\\.22\\)/rgba\\(27,47,110,.22\\)/g' -e 's/rgba\\(25,61,43,\\\\.3\\)/rgba\\(27,47,110,.3\\)/g' -e 's/rgba\\(25,61,43,\\\\.26\\)/rgba\\(27,47,110,.26\\)/g' -e 's/rgba\\(25,61,43,\\\\.34\\)/rgba\\(27,47,110,.34\\)/g' -e 's/rgba\\(58,107,78,\\\\.08\\)/rgba\\(41,82,163,.08\\)/g' -e 's/rgba\\(58,107,78,\\\\.1\\)/rgba\\(41,82,163,.1\\)/g' -e 's/rgba\\(58,107,78,\\\\.2\\)/rgba\\(41,82,163,.2\\)/g' -e 's/rgba\\(58,107,78,\\\\.09\\)/rgba\\(41,82,163,.09\\)/g' -e 's/rgba\\(58,107,78,\\\\.15\\)/rgba\\(41,82,163,.15\\)/g' -e 's/rgba\\(58,107,78,\\\\.35\\)/rgba\\(41,82,163,.35\\)/g' -e 's/rgba\\(58,107,78,\\\\.22\\)/rgba\\(41,82,163,.22\\)/g' '{}' +)",
+      "Bash(find /c/wamp64/www/laravel11/UrbanSignal/app -name \"*.php\" -exec php -l {} \\\\;)",
+      "Bash(grep -v \"^$\")",
+      "Bash(find /c/wamp64/www/laravel11/UrbanSignal/routes -name \"*.php\" -exec php -l {} \\\\;)",
+      "Bash(grep -v \"^$\\\\|GET\\\\|POST\\\\|PUT\\\\|PATCH\\\\|DELETE\\\\|HEAD\\\\|name\\\\|-\")",
+      "Bash(grep \"public function\" /c/wamp64/www/laravel11/UrbanSignal/app/Http/Controllers/Admin/*.php /c/wamp64/www/laravel11/UrbanSignal/app/Http/Controllers/Agent/*.php /c/wamp64/www/laravel11/UrbanSignal/app/Http/Controllers/Citizen/*.php)",
+      "Bash(php -r \"echo phpversion\\(\\);\")",
+      "Bash(php -r \"require '/c/wamp64/www/laravel11/UrbanSignal/vendor/autoload.php'; echo class_exists\\('PhpOffice\\\\PhpWord\\\\PhpWord'\\) ? 'PhpWord OK' : 'PhpWord absent';\")",
+      "Bash(php -r \"require 'vendor/autoload.php'; echo class_exists\\('PhpOffice\\\\PhpWord\\\\PhpWord'\\) ? 'PhpWord OK' : 'PhpWord absent';\")",
+      "Bash(php generate_memoire.php)"
+    ],
+    "additionalDirectories": [
+      "\\tmp"
     ]
   }
 }

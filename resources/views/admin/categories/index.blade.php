@@ -5,7 +5,7 @@
 <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
     <div class="flex items-center justify-between mb-6">
         <h1 class="text-2xl font-bold text-gray-900">Catégories de signalement</h1>
-        <a href="{{ route('admin.categories.create') }}" class="inline-flex items-center px-4 py-2 bg-green-600 text-white font-medium rounded-lg hover:bg-green-700 transition text-sm">
+        <a href="{{ route('admin.categories.create') }}" class="inline-flex items-center px-4 py-2 bg-blue-700 text-white font-medium rounded-lg hover:bg-blue-800 transition text-sm">
             + Nouvelle catégorie
         </a>
     </div>
@@ -55,13 +55,13 @@
                         <span class="inline-flex items-center px-2.5 py-1 bg-gray-100 text-gray-700 rounded-full text-xs font-semibold">{{ $cat->reports_count }}</span>
                     </td>
                     <td class="px-5 py-3">
-                        <span class="px-2.5 py-1 rounded-full text-xs font-medium {{ $cat->is_active ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-600' }}">
+                        <span class="px-2.5 py-1 rounded-full text-xs font-medium {{ $cat->is_active ? 'bg-green-100 text-blue-700' : 'bg-red-100 text-red-600' }}">
                             {{ $cat->is_active ? 'Active' : 'Inactive' }}
                         </span>
                     </td>
                     <td class="px-5 py-3 text-right">
                         <div class="flex items-center justify-end gap-2">
-                            <a href="{{ route('admin.categories.edit', $cat) }}" title="Modifier" class="p-1.5 rounded-lg text-gray-400 hover:text-green-600 hover:bg-green-50 transition">
+                            <a href="{{ route('admin.categories.edit', $cat) }}" title="Modifier" class="p-1.5 rounded-lg text-gray-400 hover:text-blue-600 hover:bg-blue-50 transition">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
                             </a>
                             @if($cat->reports_count === 0)

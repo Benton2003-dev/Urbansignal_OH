@@ -27,8 +27,8 @@
                         <p class="text-xs text-gray-400 mt-1">Soumis par <strong>{{ $report->user->name }}</strong> le {{ $report->created_at->format('d/m/Y à H:i') }}</p>
                     </div>
                     @php
-                    $sc = ['submitted'=>'bg-gray-100 text-gray-700','validated'=>'bg-blue-100 text-blue-700','in_progress'=>'bg-yellow-100 text-yellow-800','resolved'=>'bg-green-100 text-green-800','archived'=>'bg-slate-100 text-slate-600'];
-                    $pc = ['low'=>'bg-green-100 text-green-700','medium'=>'bg-yellow-100 text-yellow-700','high'=>'bg-orange-100 text-orange-700','urgent'=>'bg-red-100 text-red-700'];
+                    $sc = ['submitted'=>'bg-gray-100 text-gray-700','validated'=>'bg-blue-100 text-blue-700','in_progress'=>'bg-yellow-100 text-yellow-800','resolved'=>'bg-green-100 text-blue-800','archived'=>'bg-slate-100 text-slate-600'];
+                    $pc = ['low'=>'bg-green-100 text-blue-700','medium'=>'bg-yellow-100 text-yellow-700','high'=>'bg-orange-100 text-orange-700','urgent'=>'bg-red-100 text-red-700'];
                     @endphp
                     <div class="flex flex-col gap-2 items-end">
                         <span class="px-3 py-1.5 rounded-full text-sm font-medium {{ $sc[$report->status] ?? '' }}">{{ $report->status_label }}</span>
@@ -113,7 +113,7 @@
                     <div class="space-y-3">
                         <div>
                             <label class="block text-xs font-medium text-gray-600 mb-1">Statut</label>
-                            <select name="status" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-green-500">
+                            <select name="status" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
                                 @foreach(['submitted'=>'Soumis','validated'=>'Validé','in_progress'=>'En cours','resolved'=>'Résolu','archived'=>'Archivé'] as $v => $l)
                                 <option value="{{ $v }}" {{ $report->status === $v ? 'selected' : '' }}>{{ $l }}</option>
                                 @endforeach
@@ -121,7 +121,7 @@
                         </div>
                         <div>
                             <label class="block text-xs font-medium text-gray-600 mb-1">Priorité</label>
-                            <select name="priority" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-green-500">
+                            <select name="priority" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
                                 @foreach(['low'=>'Faible','medium'=>'Moyen','high'=>'Élevé','urgent'=>'Urgent'] as $v => $l)
                                 <option value="{{ $v }}" {{ $report->priority === $v ? 'selected' : '' }}>{{ $l }}</option>
                                 @endforeach
@@ -130,14 +130,14 @@
                         <div>
                             <label class="block text-xs font-medium text-gray-600 mb-1">Notes de l'agent</label>
                             <textarea name="agent_notes" rows="3" placeholder="Notes internes..."
-                                      class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-green-500 resize-none">{{ $report->agent_notes }}</textarea>
+                                      class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none">{{ $report->agent_notes }}</textarea>
                         </div>
                         <div>
                             <label class="block text-xs font-medium text-gray-600 mb-1">Commentaire (visible dans l'historique)</label>
                             <textarea name="comment" rows="2" placeholder="Expliquez la mise à jour..."
-                                      class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-green-500 resize-none"></textarea>
+                                      class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"></textarea>
                         </div>
-                        <button type="submit" class="w-full py-2.5 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition text-sm">
+                        <button type="submit" class="w-full py-2.5 bg-blue-700 text-white font-semibold rounded-lg hover:bg-blue-800 transition text-sm">
                             Sauvegarder
                         </button>
                     </div>
@@ -153,7 +153,7 @@
                 <form action="{{ route('agent.reports.assign', $report) }}" method="POST">
                     @csrf
                     @method('PATCH')
-                    <select name="assigned_team_id" required class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-green-500 mb-3">
+                    <select name="assigned_team_id" required class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 mb-3">
                         <option value="">Sélectionner une équipe...</option>
                         @foreach($teams as $team)
                         <option value="{{ $team->id }}" {{ $report->assigned_team_id === $team->id ? 'selected' : '' }}>{{ $team->name }}</option>

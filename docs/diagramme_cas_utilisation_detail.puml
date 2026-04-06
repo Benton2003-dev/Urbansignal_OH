@@ -1,0 +1,173 @@
+@startuml UCU_UrbanSignal_Detail
+
+title Détail des Cas d'Utilisation — UrbanSignal\nCycle de vie & interactions clés
+
+left to right direction
+
+skinparam backgroundColor #FFFFFF
+skinparam defaultFontName Helvetica
+skinparam defaultFontSize 11
+skinparam actorStyle awesome
+
+skinparam usecase {
+  BackgroundColor #DBEAFE
+  BorderColor #1D4ED8
+  FontColor #1E3A5F
+  FontSize 11
+  BorderThickness 1.5
+}
+skinparam actor {
+  BackgroundColor #1B2F6E
+  FontColor #1B2F6E
+  FontSize 11
+  BorderColor #1B2F6E
+}
+skinparam package {
+  BackgroundColor #F8FAFF
+  BorderColor #2952A3
+  BorderThickness 2
+  FontColor #1B2F6E
+  FontStyle Bold
+  FontSize 12
+}
+skinparam note {
+  BackgroundColor #FFFBEB
+  BorderColor #D97706
+  FontSize 10
+  FontColor #78350F
+}
+skinparam ArrowColor #2952A3
+skinparam ArrowFontSize 9
+
+' ─── Acteurs ───────────────────────────────────────────────────
+actor "Visiteur"             as Visiteur
+actor "Citoyen"              as Citoyen
+actor "Agent technique"      as Agent
+actor "Administrateur"       as Admin
+actor "Super Administrateur" as SuperAdmin
+
+Visiteur  -[hidden]d-> Citoyen
+Citoyen   -[hidden]d-> Agent
+Agent     -[hidden]d-> Admin
+Admin     -[hidden]d-> SuperAdmin
+
+' ─── BLOC 1 : Signalement citoyen ──────────────────────────────
+package "Créer un signalement (4 étapes)" as PKG_CREATE {
+  usecase "Étape 1 — Choisir\ndomaine & catégorie"    as S1
+  usecase "Étape 2 — Localiser\n(adresse + GPS)"      as S2
+  usecase "Étape 3 — Ajouter\ndes photos"              as S3
+  usecase "Étape 4 — Récapitulatif\n& soumission"      as S4
+}
+
+Citoyen --> S1
+S1 .> S2 : <<include>>
+S2 .> S3 : <<extend>>
+S3 .> S4 : <<include>>
+
+note bottom of S4
+  Génère automatiquement
+  un ticket : US-AAAA-NNNNN
+  ex : US-2026-00001
+end note
+
+' ─── BLOC 2 : Suivi ticket public ──────────────────────────────
+package "Suivi sans connexion" as PKG_TRACK {
+  usecase "Saisir numéro de ticket"     as T1
+  usecase "Afficher état & historique"  as T2
+  usecase "Voir les photos du rapport"  as T3
+}
+
+Visiteur --> T1
+T1 .> T2 : <<include>>
+T2 .> T3 : <<extend>>
+
+note right of T2
+  Affiche :
+  - Statut actuel
+  - Historique des changements
+  - Équipe assignée
+  - Notes de l'agent
+end note
+
+' ─── BLOC 3 : Cycle de statut (Agent) ──────────────────────────
+package "Gestion du statut (Agent)" as PKG_STATUS {
+  usecase "Valider le signalement"      as ST1
+  usecase "Passer En cours"             as ST2
+  usecase "Marquer comme Résolu"        as ST3
+  usecase "Archiver"                    as ST4
+  usecase "Ajouter note technique"      as ST5
+  usecase "Assigner une équipe"         as ST6
+}
+
+Agent --> ST1
+Agent --> ST2
+Agent --> ST3
+Agent --> ST4
+Agent --> ST6
+
+ST1 .> ST5 : <<extend>>
+ST2 .> ST5 : <<extend>>
+ST3 .> ST5 : <<extend>>
+ST2 .> ST6 : <<extend>>
+
+note right of ST1
+  Cycle de vie complet :
+  Soumis → Validé
+  → En cours → Résolu → Archivé
+  Chaque transition est tracée
+  dans l'historique.
+end note
+
+' ─── BLOC 4 : Admin — Structure métier ─────────────────────────
+package "Structure métier (Admin)" as PKG_ADMIN {
+  usecase "Créer un domaine"            as A1
+  usecase "Créer une catégorie\n(liée au domaine)" as A2
+  usecase "Créer une équipe\n(liée au domaine)"    as A3
+  usecase "Activer / Désactiver\nun compte"         as A4
+  usecase "Consulter les statistiques\n(mensuel / arrondissement)" as A5
+}
+
+Admin --> A1
+Admin --> A2
+Admin --> A3
+Admin --> A4
+Admin --> A5
+
+A2 .> A1 : <<include>>
+A3 .> A1 : <<include>>
+
+note right of A4
+  Un compte désactivé
+  ne peut plus se connecter.
+  Message d'erreur affiché
+  sur la page de connexion.
+end note
+
+' ─── BLOC 5 : SuperAdmin ───────────────────────────────────────
+package "Administration système (SuperAdmin)" as PKG_SA {
+  usecase "Promouvoir un utilisateur\n(citizen → agent / admin)" as SA1
+  usecase "Bannir / Débannir\nun utilisateur"                     as SA2
+  usecase "Réinitialiser le\nmot de passe"                        as SA3
+  usecase "Activer le mode\nmaintenance"                          as SA4
+  usecase "Vider le cache\nde l'application"                      as SA5
+  usecase "Exporter CSV\n(utilisateurs + signalements)"           as SA6
+  usecase "Modifier les paramètres\nde l'application"             as SA7
+}
+
+SuperAdmin --> SA1
+SuperAdmin --> SA2
+SuperAdmin --> SA3
+SuperAdmin --> SA4
+SuperAdmin --> SA5
+SuperAdmin --> SA6
+SuperAdmin --> SA7
+
+SA1 .> SA3 : <<extend>>
+
+note right of SA4
+  En mode maintenance,
+  seul le SuperAdmin
+  peut accéder au système.
+end note
+
+@enduml

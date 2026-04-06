@@ -4,7 +4,7 @@
 @section('content')
 <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
     <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-        <svg class="w-10 h-10 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg class="w-10 h-10 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
         </svg>
     </div>
@@ -16,7 +16,7 @@
         <div class="text-center mb-6">
             <p class="text-sm text-gray-500 mb-2">Votre numéro de ticket</p>
             <div class="inline-block px-6 py-3 bg-green-50 border-2 border-green-200 rounded-xl">
-                <span class="font-mono text-2xl font-bold text-green-700">{{ $report->ticket_number }}</span>
+                <span class="font-mono text-2xl font-bold text-blue-700">{{ $report->ticket_number }}</span>
             </div>
             <p class="text-xs text-gray-400 mt-2">Conservez ce numéro pour suivre l'avancement de votre signalement.</p>
         </div>
@@ -47,7 +47,7 @@
 
     <div class="flex flex-wrap justify-center gap-4">
         <a href="{{ route('citizen.reports.show', $report) }}"
-           class="inline-flex items-center px-6 py-3 bg-green-600 text-white font-semibold rounded-xl hover:bg-green-700 transition">
+           class="inline-flex items-center px-6 py-3 bg-blue-700 text-white font-semibold rounded-xl hover:bg-blue-800 transition">
             Voir mon signalement →
         </a>
         <a href="{{ route('citizen.dashboard') }}"

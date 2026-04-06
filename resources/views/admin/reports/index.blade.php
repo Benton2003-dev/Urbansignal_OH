@@ -65,8 +65,8 @@
                 <tbody class="bg-white divide-y divide-gray-100">
                     @forelse($reports as $report)
                     @php
-                    $sc=['submitted'=>'bg-gray-100 text-gray-700','validated'=>'bg-blue-100 text-blue-700','in_progress'=>'bg-yellow-100 text-yellow-800','resolved'=>'bg-green-100 text-green-800','archived'=>'bg-slate-100 text-slate-600'];
-                    $pc=['low'=>'text-green-600','medium'=>'text-yellow-600','high'=>'text-orange-600','urgent'=>'text-red-600 font-bold'];
+                    $sc=['submitted'=>'bg-gray-100 text-gray-700','validated'=>'bg-blue-100 text-blue-700','in_progress'=>'bg-yellow-100 text-yellow-800','resolved'=>'bg-green-100 text-blue-800','archived'=>'bg-slate-100 text-slate-600'];
+                    $pc=['low'=>'text-blue-600','medium'=>'text-yellow-600','high'=>'text-orange-600','urgent'=>'text-red-600 font-bold'];
                     @endphp
                     <tr class="hover:bg-gray-50 transition">
                         <td class="px-5 py-3 whitespace-nowrap"><span class="font-mono text-xs bg-gray-100 px-2 py-1 rounded">{{ $report->ticket_number }}</span></td>
