@@ -24,7 +24,7 @@
     .sa-sidebar { width: 240px; flex-shrink: 0; background: var(--surface); border-right: 1px solid var(--border); display: flex; flex-direction: column; position: sticky; top: 0; height: 100vh; overflow-y: auto; }
     .sa-sidebar__logo { padding: 1.5rem 1.25rem 1rem; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: .65rem; }
     .sa-sidebar__mark { width: 34px; height: 34px; border-radius: 9px; background: var(--royal); display: flex; align-items: center; justify-content: center; box-shadow: 0 0 20px rgba(41,82,163,.5); }
-    .sa-sidebar__name { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: .95rem; color: var(--text); }
+    .sa-sidebar__name { font-family: 'Syne', sans-serif; font-weight: 800; font-size: .95rem; color: var(--text); }
     .sa-sidebar__name em { font-style: italic; color: var(--sky); }
     .sa-sidebar__role { font-size: .62rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); padding: .35rem .75rem .1rem 1.25rem; display: block; margin-top: .5rem; }
     .sa-nav { padding: .5rem .75rem 1rem; flex: 1; }
@@ -132,8 +132,8 @@
     {{-- Sidebar --}}
     <aside class="sa-sidebar">
         <div class="sa-sidebar__logo">
-            <div class="sa-sidebar__mark">
-                <svg width="17" height="17" fill="none" viewBox="0 0 24 24"><path stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0zM15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+           <div class="sa-sidebar__mark">  
+                <img src="{{ asset('images/logo.svg') }}" alt="Logo UrbanSignal" style="width: 100%; height: 100%; object-fit: contain;">
             </div>
             <div>
                 <span class="sa-sidebar__name">Urban<em>Signal</em></span>

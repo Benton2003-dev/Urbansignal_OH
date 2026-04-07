@@ -16,7 +16,7 @@ class UserSeeder extends Seeder
             [
                 'name'     => 'Administrateur UrbanSignal',
                 'email'    => 'admin@urbansignal.bj',
-                'phone'    => '+229 97 00 00 00',
+                'phone'    => '+229 01 97 00 00 00',
                 'role'     => 'admin',
                 'password' => Hash::make('Admin@2024'),
                 'email_verified_at' => now(),

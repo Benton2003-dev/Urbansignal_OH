@@ -4,7 +4,7 @@
 @push('styles')
 <style>
 /* ── Google Fonts ── */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;900&family=Poppins:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Outfit:wght@300;400;500;600&display=swap');
 
 /* ── Design Tokens ── */
 :root {
@@ -27,7 +27,7 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-body { background: var(--sand); font-family: 'Poppins', sans-serif ; }
+body { background: var(--sand); font-family: 'Outfit', sans-serif; }
 
 /* ════ HERO ════ */
 .us-hero {
@@ -152,7 +152,7 @@ body { background: var(--sand); font-family: 'Poppins', sans-serif ; }
   display: inline-flex; align-items: center; gap: .5rem;
   background: var(--clay);
   color: #fff;
-  font-family: 'Poppins', sans-serif ;
+  font-family: 'Outfit', sans-serif;
   font-weight: 600; font-size: .9rem;
   padding: .85rem 1.65rem;
   border-radius: 12px;
@@ -171,7 +171,7 @@ body { background: var(--sand); font-family: 'Poppins', sans-serif ; }
   background: rgba(255,255,255,.07);
   border: 1px solid rgba(255,255,255,.16);
   color: rgba(255,255,255,.78);
-  font-family: 'Poppins', sans-serif ;
+  font-family: 'Outfit', sans-serif;
   font-weight: 500; font-size: .9rem;
   padding: .85rem 1.65rem;
   border-radius: 12px;
@@ -267,22 +267,6 @@ body { background: var(--sand); font-family: 'Poppins', sans-serif ; }
   font-size: .75rem; font-weight: 500;
   letter-spacing: .08em; text-transform: uppercase;
   color: var(--smoke);
-}
-
-/* ════ BANDEAU URGENCE ════ */
-.us-urgent-bar {
-  background: linear-gradient(90deg, #DC2626, #EF4444);
-  padding: .6rem 2rem;
-  text-align: center;
-}
-.us-urgent-bar__inner {
-  display: inline-flex; align-items: center; gap: .6rem;
-  font-size: .82rem; font-weight: 500; color: #fff;
-}
-.us-urgent-bar__dot {
-  width: 8px; height: 8px; border-radius: 50%;
-  background: #fff; flex-shrink: 0;
-  animation: us-breathe 1.5s ease-in-out infinite;
 }
 
 /* ════ DERNIERS SIGNALEMENTS ════ */
@@ -571,7 +555,7 @@ body { background: var(--sand); font-family: 'Poppins', sans-serif ; }
   border-radius: 12px;
   padding: .9rem 1.2rem;
   color: #fff;
-  font-family: 'Poppins', sans-serif  ; font-size: .9rem;
+  font-family: 'Outfit', sans-serif; font-size: .9rem;
   outline: none;
   transition: border-color .2s, background .2s;
 }
@@ -583,7 +567,7 @@ body { background: var(--sand); font-family: 'Poppins', sans-serif ; }
 
 .us-track__btn {
   background: var(--clay); color: #fff;
-  font-family: 'Poppins', sans-serif  ;
+  font-family: 'Outfit', sans-serif;
   font-weight: 600; font-size: .9rem;
   padding: .9rem 1.6rem;
   border-radius: 12px; border: none; cursor: pointer;
@@ -595,7 +579,7 @@ body { background: var(--sand); font-family: 'Poppins', sans-serif ; }
 
 /* ════ CTA ════ */
 .us-cta {
-  padding: 8rem 2rem;
+  padding: 4rem 1rem;
   text-align: center;
   position: relative; overflow: hidden;
 }
@@ -628,7 +612,7 @@ body { background: var(--sand); font-family: 'Poppins', sans-serif ; }
 .us-cta__btn {
   display: inline-flex; align-items: center; gap: .6rem;
   background: var(--forest); color: #fff;
-  font-family: 'Poppins', sans-serif  ;
+  font-family: 'Outfit', sans-serif;
   font-weight: 600; font-size: .98rem;
   padding: 1rem 2.25rem;
   border-radius: 14px; text-decoration: none;
@@ -661,12 +645,12 @@ body { background: var(--sand); font-family: 'Poppins', sans-serif ; }
             </div>
 
             <h1>
-                Signalez les dégradations<br>
-                de voirie de <em>Ouidah</em>
+                Signalez les pannes urbaines<br>
+                de <em>Ouidah</em>
             </h1>
 
             <p class="us-hero__desc">
-                UrbanSignal permet aux citoyens de signaler facilement les nids-de-poule, routes cassées, fuite d'eau, caniveaux bouchés  et autres problèmes urbains. La mairie intervient plus rapidement grâce à votre signalement.
+                UrbanSignal permet aux citoyens de signaler facilement les nids-de-poule, routes cassées, fuite d'eau, caniveaux bouchés  et autres problèmes urbains. La Mairie intervient plus rapidement grâce à votre signalement.
             </p>
 
             <div class="us-hero__actions">

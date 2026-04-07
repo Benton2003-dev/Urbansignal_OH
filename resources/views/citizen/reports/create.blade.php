@@ -27,7 +27,7 @@
         @foreach($stepLabels as $i => $label)
         <div class="flex items-center {{ $loop->last ? '' : 'flex-1' }}">
             <div class="step-indicator flex items-center justify-center w-8 h-8 rounded-full text-sm font-bold
-                {{ $i === 0 ? 'bg-blue-700 text-white' : 'bg-gray-200 text-gray-400' }}" id="step-badge-{{ $i }}">
+                {{ $i === 0 ? 'bg-blue-700 text-green' : 'bg-gray-200 text-gray-400' }}" id="step-badge-{{ $i }}">
                 {{ $i + 1 }}
             </div>
             <span class="ml-2 text-sm font-medium {{ $i === 0 ? 'text-blue-700' : 'text-gray-400' }}" id="step-label-{{ $i }}">{{ $label }}</span>
@@ -113,7 +113,7 @@
             </div>
 
             <div class="flex justify-end mt-6">
-                <button type="button" onclick="nextStep(0)" class="px-6 py-2.5 bg-blue-700 text-white font-semibold rounded-xl hover:bg-blue-800 transition">
+                <button type="button" onclick="nextStep(0)" class="px-6 py-2.5 bg-blue-700 text-green font-semibold rounded-xl hover:bg-blue-800 transition">
                     Suivant →
                 </button>
             </div>
@@ -186,7 +186,7 @@
                 <button type="button" onclick="prevStep(1)" class="px-5 py-2.5 border border-gray-200 text-gray-600 font-medium rounded-xl hover:bg-gray-50 transition">
                     ← Précédent
                 </button>
-                <button type="button" onclick="nextStep(1)" class="px-6 py-2.5 bg-blue-700 text-white font-semibold rounded-xl hover:bg-blue-800 transition">
+                <button type="button" onclick="nextStep(1)" class="px-6 py-2.5 bg-blue-700 text-green font-semibold rounded-xl hover:bg-blue-800 transition">
                     Suivant →
                 </button>
             </div>
@@ -214,7 +214,7 @@
                 <button type="button" onclick="prevStep(2)" class="px-5 py-2.5 border border-gray-200 text-gray-600 font-medium rounded-xl hover:bg-gray-50 transition">
                     ← Précédent
                 </button>
-                <button type="button" onclick="nextStep(2)" class="px-6 py-2.5 bg-blue-700 text-white font-semibold rounded-xl hover:bg-blue-800 transition">
+                <button type="button" onclick="nextStep(2)" class="px-6 py-2.5 bg-blue-700 text-green font-semibold rounded-xl hover:bg-blue-800 transition">
                     Suivant →
                 </button>
             </div>
@@ -251,7 +251,7 @@
                 <button type="button" onclick="prevStep(3)" class="px-5 py-2.5 border border-gray-200 text-gray-600 font-medium rounded-xl hover:bg-gray-50 transition">
                     ← Précédent
                 </button>
-                <button type="submit" class="px-8 py-2.5 bg-blue-700 text-white font-bold rounded-xl hover:bg-blue-800 transition shadow-sm flex items-center gap-2">
+                <button type="submit" class="px-8 py-2.5 bg-blue-700 text-green font-bold rounded-xl hover:bg-blue-800 transition shadow-sm flex items-center gap-2">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>
                     Soumettre le signalement
                 </button>
@@ -275,14 +275,14 @@ function showStep(step) {
         const badge = document.getElementById('step-badge-' + i);
         const label = document.getElementById('step-label-' + i);
         if (i < step) {
-            badge.className = badge.className.replace('bg-gray-200 text-gray-400', '').replace('bg-blue-700 text-white', '') + ' bg-green-100 text-blue-700';
+            badge.className = badge.className.replace('bg-gray-200 text-gray-400', '').replace('bg-blue-700 text-green', '') + ' bg-green-100 text-blue-700';
             badge.innerHTML = '✓';
         } else if (i === step) {
-            badge.className = badge.className.replace('bg-gray-200 text-gray-400', '').replace('bg-green-100 text-blue-700', '') + ' bg-blue-700 text-white';
+            badge.className = badge.className.replace('bg-gray-200 text-gray-400', '').replace('bg-green-100 text-blue-700', '') + ' bg-blue-700 text-green';
             badge.innerHTML = i + 1;
             label.className = label.className.replace('text-gray-400', 'text-blue-700 font-semibold');
         } else {
-            badge.className = badge.className.replace('bg-blue-700 text-white', '').replace('bg-green-100 text-blue-700', '') + ' bg-gray-200 text-gray-400';
+            badge.className = badge.className.replace('bg-blue-700 text-green', '').replace('bg-green-100 text-blue-700', '') + ' bg-gray-200 text-gray-400';
             badge.innerHTML = i + 1;
             label.className = label.className.replace('text-blue-700 font-semibold', 'text-gray-400');
         }

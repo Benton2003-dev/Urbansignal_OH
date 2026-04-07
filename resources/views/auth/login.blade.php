@@ -98,10 +98,11 @@
       text-decoration: none; margin-bottom: 3rem;
     }
     .auth-panel__mark {
-      width: 38px; height: 38px; border-radius: 10px;
-      background: var(--clay);
+      width: 50px; height: 50px; border-radius: 10px;
+      background:  var(--gold);
       display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 3px 16px rgba(201,107,53,.4);
+      box-shadow: none;
+      flex-shrink: 0;
     }
     .auth-panel__brand {
       font-family: 'Montserrat', sans-serif;
@@ -345,19 +346,16 @@
         <div class="auth-panel__top">
             <a href="{{ route('home') }}" class="auth-panel__logo">
                 <div class="auth-panel__mark">
-                    <svg width="18" height="18" fill="none" viewBox="0 0 24 24">
-                        <path stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2"
-                              d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0zM15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-                    </svg>
+                <img src="{{ asset('images/logo.svg') }}" alt="Logo UrbanSignal" style="width: 100%; height: 100%; object-fit: contain;">
                 </div>
                 <span class="auth-panel__brand">Urban<em>Signal</em></span>
             </a>
 
             <h2 class="auth-panel__headline">
-                La voirie de <em>Ouidah</em><br>a besoin de vous.
+                La Commune de <em>Ouidah</em><br>a besoin de vous.
             </h2>
             <p class="auth-panel__desc">
-                Signalez les dégradations, suivez leur traitement et participez à l'amélioration de votre commune.
+                Signalez les pannes de votre quartier, suivez leur traitement et participez à l'amélioration de votre commune.
             </p>
         </div>
 
@@ -405,7 +403,7 @@
                     <input id="email" type="email" name="email"
                            value="{{ old('email') }}"
                            class="auth-input"
-                           placeholder="vous@exemple.com"
+                           placeholder="vous@gmail.com"
                            required autofocus autocomplete="username">
                     @error('email')
                         <div class="auth-error">{{ $message }}</div>
