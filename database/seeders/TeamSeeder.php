@@ -34,7 +34,7 @@ class TeamSeeder extends Seeder
             [
                 'domain_id'     => $voirie?->id,
                 'name'          => 'Équipe Voirie Est',
-                'description'   => 'Responsable des arrondissements Ouidah V et Pahou',
+                'description'   => 'Responsable des arrondissements Avlékété, Djègbadji et Pahou',
                 'contact_phone' => '+229 97 00 00 03',
                 'contact_email' => 'voirie.est@mairie-ouidah.bj',
             ],

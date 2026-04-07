@@ -708,35 +708,24 @@ body { background: var(--sand); font-family: 'Poppins', sans-serif ; }
 {{-- ═════ STATS ═════ --}}
 <section class="us-stats">
     <div class="us-stats__card">
-        <div class="us-stat" style="--c: var(--ink)">
-            <div class="us-stat__num">{{ $stats['total'] }}</div>
+        <div class="us-stat" style="--c: var(--olive)">
+            <div class="us-stat__num" style="color: var(--forest)">{{ $stats['total'] }}</div>
             <div class="us-stat__label">Total signalements</div>
         </div>
-        <div class="us-stat" style="--c: var(--olive)">
-            <div class="us-stat__num" style="color: var(--forest)">{{ $stats['resolved'] }}</div>
+        <div class="us-stat" style="--c: var(--clay)">
+            <div class="us-stat__num" style="color: var(--clay)">{{ $stats['resolved'] }}</div>
             <div class="us-stat__label">Problèmes résolus</div>
         </div>
-        <div class="us-stat" style="--c: var(--clay)">
-            <div class="us-stat__num" style="color: var(--clay)">{{ $stats['in_progress'] }}</div>
+        <div class="us-stat" style="--c: var(--olive)">
+            <div class="us-stat__num" style="color: var(--forest)">{{ $stats['in_progress'] }}</div>
             <div class="us-stat__label">En cours de traitement</div>
         </div>
-        <div class="us-stat" style="--c: var(--amber)">
-            <div class="us-stat__num" style="color: var(--smoke)">{{ $stats['submitted'] }}</div>
+        <div class="us-stat" style="--c: var(--clay)">
+            <div class="us-stat__num" style="color: var(--clay)">{{ $stats['submitted'] }}</div>
             <div class="us-stat__label">En attente</div>
         </div>
     </div>
 </section>
-
-{{-- ═════ BANDEAU URGENCE (conditionnel) ═════ --}}
-@if($urgentCount > 0)
-<div class="us-urgent-bar">
-    <div class="us-urgent-bar__inner">
-        <span class="us-urgent-bar__dot"></span>
-        <strong>{{ $urgentCount }} signalement{{ $urgentCount > 1 ? 's' : '' }} urgent{{ $urgentCount > 1 ? 's' : '' }}</strong>
-        en cours de traitement par la mairie
-    </div>
-</div>
-@endif
 
 {{-- ═════ DERNIERS SIGNALEMENTS ═════ --}}
 <section class="us-recent">

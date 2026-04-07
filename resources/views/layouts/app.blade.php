@@ -22,8 +22,8 @@
                     <a href="{{ route('home') }}" class="flex items-center space-x-2">
                         <img src="{{ asset('images/logo.svg') }}" alt="UrbanSignal" class="h-9 w-auto">
                         <div>
-                            <span class="font-bold text-lg text-gray-900 leading-none">UrbanSignal</span>
-                            <p class="text-xs text-gray-400 leading-none">Commune de Ouidah</p>
+                            <span style="color: #000000; font-size:20px">Urban</span><em style="font-style: italic;color:#E8B84B; font-size:20px">Signal</em>
+                            <p class="text-xs text-gray leading-none">Commune de Ouidah</p>
                         </div>
                     </a>
                 </div>
@@ -149,13 +149,14 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div>
                     <div class="flex items-center space-x-2 mb-3">
-                        <div class="w-8 h-8 bg-blue-700 rounded-lg flex items-center justify-center">
-                            <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                            </svg>
+                        <a href="{{ route('home') }}" class="flex items-center space-x-2">
+                        <img src="{{ asset('images/logo.svg') }}" alt="UrbanSignal" class="h-9 w-auto">
+                        <div>
+                            <span style="color: #FFFF; font-size:20px">Urban</span><em style="font-style: italic; color:#E8B84B; font-size:20px">Signal</em>
+                            <p class="text-xs text-gray leading-none">Commune de Ouidah</p>
                         </div>
-                        <span class="text-white font-bold">UrbanSignal</span>
-                    </div>
+                    </a>
+                    </div><br>
                     <p class="text-sm leading-relaxed">Plateforme de signalement des dégradations de voirie pour la commune de Ouidah, Bénin.</p>
                 </div>
                 <div>
