@@ -142,7 +142,7 @@
         transition: background .18s, transform .18s, box-shadow .18s;
     }
     .us-nav__btn:hover {
-        background: #d4a73c;
+        background: #D97840;
         transform: translateY(-1px);
         box-shadow: 0 6px 20px rgba(232,184,75,.4);
     }
@@ -320,13 +320,13 @@
         padding: .75rem 1rem; border-radius: 8px;
         font-size: .95rem; font-weight: 600;
         color: #fff; text-decoration: none;
-        background: var(--royal);
+        background: #E8B84B;
         margin-top: .5rem;
         border: none; cursor: pointer; width: 100%;
         transition: background .15s;
         justify-content: center;
     }
-    .us-nav__mobile-btn-action:hover { background: #1E3F7F; }
+    .us-nav__mobile-btn-action:hover { background: #D97840; }
     .us-nav__mobile-btn-action--danger {
         background: #DC2626;
     }
@@ -713,7 +713,7 @@
             </a>
             <a href="{{ route('register') }}" class="us-nav__mobile-btn-action">
                 <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
-                S'inscrire gratuitement
+                S'inscrire
             </a>
         @endauth
     </div>
