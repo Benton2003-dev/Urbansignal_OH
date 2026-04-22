@@ -235,7 +235,7 @@
             <div class="mb-6">
                 <label class="block text-sm font-medium text-gray-700 mb-1">Description détaillée <span class="text-red-500">*</span></label>
                 <textarea name="description" required rows="5" maxlength="2000"
-                          placeholder="Décrivez le problème en détail : sa taille approximative, depuis combien de temps il existe, quel impact il a sur la circulation..."
+                          placeholder="Décrivez le problème en détail : sa taille approximative, la zone concernée, depuis combien de temps il existe, quel impact il a sur la circulation, l'endroit précis..."
                           class="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900 resize-none">{{ old('description') }}</textarea>
                 <p class="text-xs text-gray-400 mt-1">Maximum 2000 caractères.</p>
             </div>

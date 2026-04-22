@@ -123,7 +123,7 @@ body { background: var(--sand); font-family: 'Poppins', sans-serif; }
 .tk-body {
   max-width: 780px;
   margin: -2.5rem auto 0;
-  padding: 0 1.5rem 5rem;
+  padding: 0 1.5rem 2rem;
   position: relative; z-index: 10;
 }
 
@@ -281,6 +281,10 @@ body { background: var(--sand); font-family: 'Poppins', sans-serif; }
   grid-template-columns: 1fr;
   gap: 1.75rem;
   border-bottom: 1px solid var(--line);
+}
+@media(max-width:599px){ 
+  .tk-form { flex-direction: column; }
+  .tk-btn-search { width: 100%; }
 }
 @media(min-width:600px){ .tk-details { grid-template-columns: 1fr 1fr; } }
 
